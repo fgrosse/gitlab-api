@@ -1,6 +1,6 @@
 <?php
 
-namespace Gitlab;
+namespace Gitlab\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
@@ -13,7 +13,9 @@ use Symfony\Component\Yaml\Yaml;
  *
  * The following magic methods are available through the service definition:
  * @method listMergeRequests
- * @method singleMergeRequests
+ * @method singleMergeRequest
+ * @method singleMergeRequestChanges
+ * @method createMergeRequest
  */
 class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
 {
