@@ -46,6 +46,21 @@ class GuzzleClientTest extends PHPUnit_Framework_TestCase
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
     }
 
+    public function testSingleMergeRequests()
+    {
+        $this->setMockResponse(__DIR__ . '/fixtures/single_merge_request.http');
+        $projectId = 'fgrosse/example-project';
+        $this->client->singleMergeRequests([
+            'project_id' => $projectId,
+            'merge_request_id' => 42,
+        ]);
+
+        $request = $this->requestHistory->getLastRequest();
+        $this->assertEquals('GET', $request->getMethod());
+        $this->assertEquals('application/json', $request->getHeader('Accept'));
+        $this->assertEquals('/projects/'.urlencode($projectId).'/merge_requests/42', $request->getPath());
+    }
+
     private function setMockResponse($path)
     {
         $mock = new ResponseMock([$path]);

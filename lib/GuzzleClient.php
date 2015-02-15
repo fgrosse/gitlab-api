@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * The following magic methods are available through the service definition:
  * @method listMergeRequests
+ * @method singleMergeRequests
  */
 class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
 {

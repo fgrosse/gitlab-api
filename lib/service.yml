@@ -47,3 +47,19 @@ operations:
                 enum: ["asc", "desc"]
                 default: "desc"
                 location: query
+
+    singleMergeRequests:
+        summary: Shows information about a single merge request.
+        httpMethod: GET
+        uri: /projects/{project_id}/merge_requests/{merge_request_id}
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            merge_request_id:
+                required: true
+                description: The ID of the MR
+                type: string
+                location: uri
