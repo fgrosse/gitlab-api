@@ -1,6 +1,6 @@
 {
-    "name": "fgrosse/github-api",
-    "description": "A PHP client for the github API",
+    "name": "fgrosse/gitlab-api",
+    "description": "A PHP client for the gitlab API",
     "license": "GPLv3",
     "authors": [
         {
