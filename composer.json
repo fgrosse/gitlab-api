@@ -1,0 +1,34 @@
+{
+    "name": "fgrosse/github-api",
+    "description": "A PHP client for the github API",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Friedrich Große",
+            "email": "friedrich.grosse@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.5",
+        "symfony/yaml": "~2.6",
+        "guzzlehttp/guzzle-services": "0.5.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gitlab\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gitlab\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "7.7.x-dev"
+        }
+    }
+}
