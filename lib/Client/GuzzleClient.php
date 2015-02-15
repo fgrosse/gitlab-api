@@ -12,10 +12,31 @@ use Symfony\Component\Yaml\Yaml;
  * the service definition (service.yml)
  *
  * The following magic methods are available through the service definition:
+ *
+ * Merge Requests API:
  * @method listMergeRequests
  * @method singleMergeRequest
  * @method singleMergeRequestChanges
  * @method createMergeRequest
+ *
+ * TODO: branches API
+ * TODO: commits API
+ * TODO: deploy_key_multiple_projects API
+ * TODO: deploy_keys API
+ * TODO: groups API
+ * TODO: issues API
+ * TODO: labels API
+ * TODO: milestones API
+ * TODO: notes API
+ * TODO: oauth2 API
+ * TODO: project_snippets API
+ * TODO: projects API
+ * TODO: repositories API
+ * TODO: repository_files API
+ * TODO: services API
+ * TODO: session API
+ * TODO: system_hooks API
+ * TODO: users API
  */
 class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
 {
