@@ -211,6 +211,7 @@ operations:
                 location: postField
 
     listMergeRequestComments:
+        extends: paginatedOperation
         summary: Adds a comment to a merge request.
         httpMethod: GET
         uri: /projects/{project_id}/merge_requests/{merge_request_id}/comments

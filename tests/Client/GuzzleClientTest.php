@@ -180,11 +180,15 @@ class GuzzleClientTest extends PHPUnit_Framework_TestCase
         $this->client->listMergeRequestComments([
             'project_id'       => $projectId,
             'merge_request_id' => $mergeRequestId,
+            'page'             => 3,
+            'per_page'         => 15,
         ]);
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
         $this->assertEquals('/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
+        $this->assertRequestHasQueryParameter('page', 3, $request);
+        $this->assertRequestHasQueryParameter('per_page', 15, $request);
     }
 
     private function setMockResponse($path)
