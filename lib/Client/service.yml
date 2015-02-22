@@ -121,7 +121,107 @@ operations:
                 type: integer
                 location: postField
 
-    # TODO: updateMergeRequest
-    # TODO: acceptMergeRequest
-    # TODO: createMergeRequestComment
-    # TODO: listMergeRequestComments
+    updateMergeRequest:
+        summary: Updates an existing merge request. You can change branches, title, or even close the MR.
+        httpMethod: PUT
+        uri: /projects/{project_id}/merge_requests/{merge_request_id}
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            merge_request_id:
+                required: true
+                description: The ID of the MR to update
+                type: string
+                location: uri
+            source_branch:
+                required: true
+                description: The source branch
+                type: string
+                location: postField
+            target_branch:
+                required: true
+                description: The target branch
+                type: string
+                location: postField
+            title:
+                required: true
+                description: The title of the MR
+                type: string
+                location: postField
+            assignee_id:
+                required: false
+                description: Assignee user ID
+                type: string
+                location: postField
+            description:
+                required: false
+                description: The description of the MR
+                type: string
+                location: postField
+            state_event:
+                required: false
+                description: The optional target project
+                type: string
+                enum: ["close", "reopen", "merge"]
+                location: postField
+
+    acceptMergeRequest:
+        summary: Merge changes submitted with MR using this API.
+        httpMethod: PUT
+        uri: /projects/{project_id}/merge_requests/{merge_request_id}/merge
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            merge_request_id:
+                required: true
+                description: The ID of the MR to update
+                type: string
+                location: uri
+            merge_commit_message:
+                required: false
+                description: Custom merge commit message
+                type: string
+                location: postField
+
+    createMergeRequestComment:
+        summary: Adds a comment to a merge request.
+        httpMethod: POST
+        uri: /projects/{project_id}/merge_requests/{merge_request_id}/comments
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            merge_request_id:
+                required: true
+                description: The ID of the MR to update
+                type: string
+                location: uri
+            note:
+                required: true
+                description: Text of comment
+                type: string
+                location: postField
+
+    listMergeRequestComments:
+        summary: Adds a comment to a merge request.
+        httpMethod: GET
+        uri: /projects/{project_id}/merge_requests/{merge_request_id}/comments
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            merge_request_id:
+                required: true
+                description: The ID of the MR to update
+                type: string
+                location: uri

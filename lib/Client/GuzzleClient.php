@@ -4,7 +4,9 @@ namespace Gitlab\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
+use GuzzleHttp\Command\Command;
 use GuzzleHttp\Command\Guzzle\Description;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -14,10 +16,13 @@ use Symfony\Component\Yaml\Yaml;
  * The following magic methods are available through the service definition:
  *
  * Merge Requests API:
- * @method listMergeRequests
- * @method singleMergeRequest
- * @method singleMergeRequestChanges
- * @method createMergeRequest
+ * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md
+ * @method array listMergeRequests
+ * @method array singleMergeRequest
+ * @method array singleMergeRequestChanges
+ * @method array createMergeRequest
+ * @method array createMergeRequestComment
+ * @method array listMergeRequestComments
  *
  * TODO: branches API
  * TODO: commits API
@@ -56,5 +61,40 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
         $client->setDefaultOption('headers/accept', 'application/json');
 
         return new self($client, $description);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \GuzzleHttp\Message\ResponseInterface
+     * @throws RequestException When an error is encountered
+     */
+    public function updateMergeRequest(array $parameters)
+    {
+        return $this->executeRequestWithBody('updateMergeRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \GuzzleHttp\Message\ResponseInterface
+     * @throws RequestException When an error is encountered
+     */
+    public function acceptMergeRequest(array $parameters)
+    {
+        return $this->executeRequestWithBody('acceptMergeRequest', $parameters);
+    }
+
+    /**
+     * This is a hack to allow guzzle PUT requests to have a body
+     * TODO submit issue request for that
+     */
+    private function executeRequestWithBody($commandName, array $parameters)
+    {
+        $parameters['request_options'] = [
+            'body' => [],
+        ];
+
+        /** @var Command $command */
+        $command = $this->getCommand($commandName, $parameters);
+        return $this->execute($command);
     }
 }
