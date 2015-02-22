@@ -2,6 +2,7 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Utils\String;
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Command;
@@ -52,11 +53,9 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
      */
     public static function factory($config = [])
     {
-        $required = [
-            'base_url',
-            'api_token'
-        ];
+        $required = [ 'base_url', 'api_token' ];
         $config = Collection::fromConfig($config, $default = [], $required);
+        $config['base_url'] = self::completeBaseUrl($config['base_url']);
 
         $descriptionArray = Yaml::parse(__DIR__ . '/service.yml');
         $description = new Description($descriptionArray);
@@ -68,6 +67,21 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
         $client->getEmitter()->attach($privateTokenPlugin);
 
         return new self($client, $description);
+    }
+
+    private static function completeBaseUrl($originalBaseUrl)
+    {
+        $baseUrl = $originalBaseUrl;
+        if (String::endsWith($baseUrl, '/') == false) {
+            $baseUrl .= '/';
+        }
+
+        $baseUrlPath = parse_url($baseUrl, PHP_URL_PATH);
+        if (String::endsWith($baseUrlPath, '/api/v3/')) {
+            return $originalBaseUrl;
+        }
+
+        return $baseUrl.'api/v3';
     }
 
     /**

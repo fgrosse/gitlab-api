@@ -29,22 +29,6 @@ class GuzzleClientTest extends PHPUnit_Framework_TestCase
         $this->client->getHttpClient()->getEmitter()->attach($this->requestHistory);
     }
 
-    public function testFactoryAddsPrivateTokenPluginToHttpClient()
-    {
-        $emitter = $this->client->getHttpClient()->getEmitter();
-        $this->assertTrue($emitter->hasListeners('before'), 'The factory method should add the PrivateTokenPlugin listener automatically');
-
-        $listeners = $emitter->listeners('before');
-        foreach ($listeners as $listener) {
-            $this->assertArrayHasKey(0, $listener);
-            if ($listener[0] instanceof PrivateTokenPlugin) {
-                return;
-            }
-        }
-
-        $this->fail("Expected the guzzle client to have the " . PrivateTokenPlugin::class);
-    }
-
     public function testListMergeRequests()
     {
         $this->setMockResponse(__DIR__ . '/fixtures/list_merge_requests.http');
