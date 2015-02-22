@@ -52,13 +52,20 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
      */
     public static function factory($config = [])
     {
-        $config = Collection::fromConfig($config, $default = [], $required = ['base_url']);
+        $required = [
+            'base_url',
+            'api_token'
+        ];
+        $config = Collection::fromConfig($config, $default = [], $required);
 
         $descriptionArray = Yaml::parse(__DIR__ . '/service.yml');
         $description = new Description($descriptionArray);
 
         $client = new Client($config->toArray());
         $client->setDefaultOption('headers/accept', 'application/json');
+
+        $privateTokenPlugin = new PrivateTokenPlugin($config['api_token']);
+        $client->getEmitter()->attach($privateTokenPlugin);
 
         return new self($client, $description);
     }

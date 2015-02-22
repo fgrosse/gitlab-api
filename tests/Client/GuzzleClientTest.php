@@ -3,6 +3,7 @@
 namespace Gitlab\Test\Client;
 
 use Gitlab\Client\GuzzleClient;
+use Gitlab\Client\PrivateTokenPlugin;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Post\PostBody;
 use GuzzleHttp\Subscriber\History;
@@ -20,11 +21,28 @@ class GuzzleClientTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->client = GuzzleClient::factory([
-            'base_url' => 'https://example.com/gitlab',
+            'base_url' => 'https://example.com/gitlab/api/v3',
+            'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);
 
         $this->requestHistory = new History();
         $this->client->getHttpClient()->getEmitter()->attach($this->requestHistory);
+    }
+
+    public function testFactoryAddsPrivateTokenPluginToHttpClient()
+    {
+        $emitter = $this->client->getHttpClient()->getEmitter();
+        $this->assertTrue($emitter->hasListeners('before'), 'The factory method should add the PrivateTokenPlugin listener automatically');
+
+        $listeners = $emitter->listeners('before');
+        foreach ($listeners as $listener) {
+            $this->assertArrayHasKey(0, $listener);
+            if ($listener[0] instanceof PrivateTokenPlugin) {
+                return;
+            }
+        }
+
+        $this->fail("Expected the guzzle client to have the " . PrivateTokenPlugin::class);
     }
 
     public function testListMergeRequests()
