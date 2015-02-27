@@ -57,8 +57,7 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
         $config = Collection::fromConfig($config, $default = [], $required);
         $config['base_url'] = self::completeBaseUrl($config['base_url']);
 
-        $descriptionArray = Yaml::parse(__DIR__ . '/service.yml');
-        $description = new Description($descriptionArray);
+        $description = self::loadServiceDefinition();
 
         $client = new Client($config->toArray());
         $client->setDefaultOption('headers/accept', 'application/json');
@@ -84,6 +83,17 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
         return $baseUrl.'api/v3';
     }
 
+    private static function loadServiceDefinition()
+    {
+        $descriptionArray = Yaml::parse(__DIR__ . '/API/service_description.yml');
+        foreach($descriptionArray['imports'] as $apiDescriptionFile) {
+            $apiDescription = Yaml::parse(__DIR__ . "/API/$apiDescriptionFile");
+            $descriptionArray = array_merge_recursive($descriptionArray, $apiDescription);
+        }
+        unset($descriptionArray['imports']);
+        return new Description($descriptionArray);
+    }
+
     /**
      * @param array $parameters
      * @return \GuzzleHttp\Message\ResponseInterface
@@ -106,7 +116,10 @@ class GuzzleClient extends \GuzzleHttp\Command\Guzzle\GuzzleClient
 
     /**
      * This is a hack to allow guzzle PUT requests to have a body
-     * TODO submit issue request for that
+     * TODO submit github issue for that
+     * @param $commandName
+     * @param array $parameters
+     * @return \GuzzleHttp\Message\ResponseInterface
      */
     private function executeRequestWithBody($commandName, array $parameters)
     {

@@ -1,0 +1,17 @@
+name: Gitlab
+apiVersion: 7.7
+operations:
+    paginatedOperation:
+        summary: Most of the Gitlab commands have the same pagination parameters which are documented in this operation
+        parameters:
+            page:
+                description: Pagination parameter to request a specific page number.
+                type: integer
+                location: query
+            per_page:
+                description: Pagination parameter to request the page size.
+                type: integer
+                location: query
+
+imports:
+    - merge_requests_api.yml

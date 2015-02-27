@@ -1,4 +1,20 @@
-TODOs:
-* write readme
-* create readme badges
-* implement more APIs
+### Not implemented APIs (yet)
+ * commits API
+ * deploy_key_multiple_projects API
+ * deploy_keys API
+ * groups API
+ * issues API
+ * labels API
+ * milestones API
+ * notes API
+ * oauth2 API
+ * project_snippets API
+ * projects API
+ * repositories API
+ * repository_files API
+ * services API
+ * session API
+ * system_hooks API
+ * users API
+
+[1]: https://github.com/gitlabhq/gitlabhq/tree/master/doc/api
