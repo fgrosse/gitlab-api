@@ -2,16 +2,16 @@
 
 namespace Gitlab\Test\Client;
 
-use Gitlab\Client\GuzzleClient;
+use Gitlab\Client\GitlabClient;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Post\PostBody;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock as ResponseMock;
 use PHPUnit_Framework_TestCase;
 
-abstract class GuzzleClientTest extends PHPUnit_Framework_TestCase
+abstract class GitlabClientTest extends PHPUnit_Framework_TestCase
 {
-    /** @var GuzzleClient */
+    /** @var GitlabClient */
     protected $client;
 
     /** @var History */
@@ -19,7 +19,7 @@ abstract class GuzzleClientTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->client = GuzzleClient::factory([
+        $this->client = GitlabClient::factory([
             'base_url' => 'https://example.com/gitlab/api/v3',
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);

@@ -2,15 +2,11 @@
 
 namespace Gitlab\Test\Client;
 
-use Gitlab\Client\GuzzleClient;
+use Gitlab\Client\GuzzleClientFactory;
 use Gitlab\Client\PrivateTokenPlugin;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Post\PostBody;
-use GuzzleHttp\Subscriber\History;
-use GuzzleHttp\Subscriber\Mock as ResponseMock;
 use PHPUnit_Framework_TestCase;
 
-class GuzzleClientFactoryMethodTest extends PHPUnit_Framework_TestCase
+class GuzzleClientFactoryTest extends PHPUnit_Framework_TestCase
 {
     public function testFactoryAddsApiPathToBasePathIfNecessary()
     {
@@ -21,8 +17,9 @@ class GuzzleClientFactoryMethodTest extends PHPUnit_Framework_TestCase
             'https://example.com/gitlab/api/v3/',
             'https://example.com:8080/gitlab/api/v3'
         ];
+
         foreach ($baseUrls as $baseUrl) {
-            $client = GuzzleClient::factory([
+            $client = GuzzleClientFactory::createClient([
                 'base_url' => $baseUrl,
                 'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
             ]);
@@ -36,7 +33,7 @@ class GuzzleClientFactoryMethodTest extends PHPUnit_Framework_TestCase
 
     public function testFactoryAddsPrivateTokenPluginToHttpClient()
     {
-        $client = GuzzleClient::factory([
+        $client = GuzzleClientFactory::createClient([
             'base_url' => 'https://example.com/gitlab',
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);

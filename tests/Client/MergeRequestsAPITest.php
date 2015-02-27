@@ -2,7 +2,7 @@
 
 namespace Gitlab\Test\Client;
 
-class MergeRequestsAPITest extends GuzzleClientTest
+class MergeRequestsAPITest extends GitlabClientTest
 {
     public function testListMergeRequests()
     {
