@@ -24,8 +24,11 @@ use GuzzleHttp\Message\ResponseInterface;
  * @method array createMergeRequestComment
  * @method array listMergeRequestComments
  *
+ * Commits API
+ * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md
+ * @method array listCommits
+ *
  * TODO: branches API
- * TODO: commits API
  * TODO: deploy_key_multiple_projects API
  * TODO: deploy_keys API
  * TODO: groups API

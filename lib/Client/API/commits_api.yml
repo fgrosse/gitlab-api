@@ -1,0 +1,22 @@
+##################################################################################
+# Gitlab Merge Requests API                                                      #
+# See https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md        #
+##################################################################################
+
+operations:
+    listCommits:
+        extends: paginatedOperation
+        summary: Get a list of repository commits in a project.
+        httpMethod: GET
+        uri: /projects/{project_id}/repository/commits
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            ref_name:
+                required: false
+                description: The name of a repository branch or tag or if not given the default branch
+                type: string
+                location: query

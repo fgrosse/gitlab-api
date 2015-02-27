@@ -6,7 +6,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 {
     public function testListMergeRequests()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/list_merge_requests.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/list_merge_requests.http');
         $projectId = 'fgrosse/example-project';
         $this->client->listMergeRequests([
             'project_id' => $projectId,
@@ -29,7 +29,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testSingleMergeRequests()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/single_merge_request.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/single_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $this->client->singleMergeRequest([
             'project_id' => $projectId,
@@ -44,7 +44,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testSingleMergeRequestsChanges()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/single_merge_request_changes.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/single_merge_request_changes.http');
         $projectId = 'fgrosse/example-project';
         $this->client->singleMergeRequestChanges([
             'project_id' => $projectId,
@@ -59,7 +59,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testCreateMergeRequest()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/create_merge_request.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/create_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $this->client->createMergeRequest([
             'project_id'    => $projectId,
@@ -85,7 +85,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testUpdateMergeRequest()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/update_merge_request.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/update_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
         $this->client->updateMergeRequest([
@@ -113,7 +113,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testAcceptMergeRequest()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/accept_merge_request.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/accept_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
         $this->client->acceptMergeRequest([
@@ -131,7 +131,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testCreateMergeRequestComment()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/create_merge_request_comment.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/create_merge_request_comment.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
         $this->client->createMergeRequestComment([
@@ -149,7 +149,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
     public function testListMergeRequestComments()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/list_merge_request_comments.http');
+        $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/list_merge_request_comments.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
         $this->client->listMergeRequestComments([
