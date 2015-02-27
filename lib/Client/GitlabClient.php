@@ -27,6 +27,10 @@ use GuzzleHttp\Message\ResponseInterface;
  * Commits API
  * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md
  * @method array listCommits
+ * @method array getCommit
+ * @method array getCommitDiff
+ * @method array getCommitComments
+ * @method array createCommitComment
  *
  * TODO: branches API
  * TODO: deploy_key_multiple_projects API

@@ -20,3 +20,68 @@ operations:
                 description: The name of a repository branch or tag or if not given the default branch
                 type: string
                 location: query
+
+    getCommit:
+        summary: Get a specific commit identified by the commit hash or name of a branch or tag.
+        httpMethod: GET
+        uri: /projects/{project_id}/repository/commits/{sha}
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            sha:
+                required: true
+                description: The commit hash or name of a repository branch or tag
+                type: string
+                location: uri
+
+    getCommitDiff:
+        extends: getCommit
+        summary: Get a specific commit identified by the commit hash or name of a branch or tag.
+        uri: /projects/{project_id}/repository/commits/{sha}/diff
+
+    getCommitComments:
+        extends: getCommit
+        summary: Get the comments of a commit in a project.
+        uri: /projects/{project_id}/repository/commits/{sha}/comments
+
+    createCommitComment:
+        summary: >
+            Adds a comment to a commit. Optionally you can post comments on a specific line of a commit.
+            Therefor both path, line_new and line_old are required.
+        httpMethod: POST
+        uri: /projects/{project_id}/repository/commits/{sha}/comments
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            sha:
+                required: true
+                description: The name of a repository branch or tag or if not given the default branch
+                type: string
+                location: uri
+            note:
+                required: true
+                description: Text of comment
+                type: string
+                location: postField
+            path:
+                required: false
+                description: The file path
+                type: string
+                location: postField
+            line:
+                required: false
+                description: The line number
+                type: integer
+                location: postField
+            line_type:
+                required: false
+                description: The line type
+                type: string
+                enum: ["new", "old"]
+                location: postField
