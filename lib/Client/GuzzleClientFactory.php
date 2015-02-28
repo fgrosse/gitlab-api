@@ -53,9 +53,9 @@ class GuzzleClientFactory
 
     private static function loadServiceDefinition()
     {
-        $descriptionArray = Yaml::parse(__DIR__ . '/API/service_description.yml');
+        $descriptionArray = Yaml::parse(__DIR__ . '/ServiceDescription/service_description.yml');
         foreach($descriptionArray['imports'] as $apiDescriptionFile) {
-            $apiDescription = Yaml::parse(__DIR__ . "/API/$apiDescriptionFile");
+            $apiDescription = Yaml::parse(__DIR__ . "/ServiceDescription/$apiDescriptionFile");
             $descriptionArray = array_merge_recursive($descriptionArray, $apiDescription);
         }
         unset($descriptionArray['imports']);

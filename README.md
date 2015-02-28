@@ -2,7 +2,6 @@
  * deploy_key_multiple_projects API
  * deploy_keys API
  * groups API
- * issues API
  * labels API
  * milestones API
  * notes API
