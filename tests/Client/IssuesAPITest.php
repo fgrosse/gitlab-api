@@ -18,7 +18,7 @@ class IssuesAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/issues', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/issues', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasQueryParameter('state', 'closed', $request);
         $this->assertRequestHasQueryParameter('labels', 'foo,bar', $request);
@@ -45,7 +45,7 @@ class IssuesAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/issues', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/issues', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasQueryParameter('state', 'closed', $request);
         $this->assertRequestHasQueryParameter('labels', 'foo,bar', $request);
@@ -67,7 +67,7 @@ class IssuesAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/issues/15', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/issues/15', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -86,7 +86,7 @@ class IssuesAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/issues', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/issues', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('title', 'This is the issue title', $request);
         $this->assertRequestHasPostParameter('description', 'This is the issue description', $request);
@@ -113,7 +113,7 @@ class IssuesAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('PUT', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/issues/$issueId", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/issues/$issueId", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('title', 'This is the issue title', $request);
         $this->assertRequestHasPostParameter('description', 'This is the issue description', $request);

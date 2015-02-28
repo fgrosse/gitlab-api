@@ -19,7 +19,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/merge_requests', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/merge_requests', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasQueryParameter('state', 'closed', $request);
         $this->assertRequestHasQueryParameter('order_by', 'updated_at', $request);
@@ -39,7 +39,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/merge_requests/42', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/merge_requests/42', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -54,7 +54,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/merge_requests/42/changes', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/merge_requests/42/changes', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -74,7 +74,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/merge_requests', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/merge_requests', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('source_branch', 'feature/test', $request);
         $this->assertRequestHasPostParameter('target_branch', 'develop', $request);
@@ -102,7 +102,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('PUT', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('source_branch', 'feature/test', $request);
         $this->assertRequestHasPostParameter('target_branch', 'develop', $request);
@@ -125,7 +125,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('PUT', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/merge", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/merge", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('merge_commit_message', 'Merging foo into bar', $request);
     }
@@ -143,7 +143,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('note', 'This is a comment', $request);
     }
@@ -162,7 +162,7 @@ class MergeRequestsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
         $this->assertRequestHasQueryParameter('page', 3, $request);
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
     }

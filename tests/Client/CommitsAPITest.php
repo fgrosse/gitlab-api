@@ -17,7 +17,7 @@ class CommitsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId).'/repository/commits', $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/repository/commits', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasQueryParameter('ref_name', 'develop', $request);
         $this->assertRequestHasQueryParameter('page', 3, $request);
@@ -36,7 +36,7 @@ class CommitsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -52,7 +52,7 @@ class CommitsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/diff", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/diff", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -68,7 +68,7 @@ class CommitsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('GET', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/comments", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/comments", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
@@ -88,7 +88,7 @@ class CommitsAPITest extends GitlabClientTest
 
         $request = $this->requestHistory->getLastRequest();
         $this->assertEquals('POST', $request->getMethod());
-        $this->assertEquals('/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/comments", $request->getPath());
+        $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/repository/commits/{$commitHash}/comments", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('note', 'Hello Commit Comment World!', $request);
         $this->assertRequestHasPostParameter('path', 'example.rb', $request);

@@ -24,10 +24,7 @@ class GuzzleClientFactoryTest extends PHPUnit_Framework_TestCase
                 'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
             ]);
             $baseUrlPath = parse_url($client->getHttpClient()->getBaseUrl(), PHP_URL_PATH);
-            if (substr($baseUrlPath, -1) === '/') {
-                $baseUrlPath = substr($baseUrlPath, 0, strlen($baseUrlPath)-1);
-            }
-            $this->assertEquals("/gitlab/api/v3", $baseUrlPath);
+            $this->assertEquals("/gitlab/api/v3/", $baseUrlPath);
         }
     }
 

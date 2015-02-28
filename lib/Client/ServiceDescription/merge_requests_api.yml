@@ -11,7 +11,7 @@ operations:
             given state (opened, closed, or merged) or all of them (all).
             The pagination parameters page and per_page can be used to restrict the list of merge requests.
         httpMethod: GET
-        uri: /projects/{project_id}/merge_requests
+        uri: projects/{project_id}/merge_requests
         parameters:
             project_id:
                 required: true
@@ -42,7 +42,7 @@ operations:
     getMergeRequest:
         summary: Shows information about a single merge request.
         httpMethod: GET
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}
+        uri: projects/{project_id}/merge_requests/{merge_request_id}
         parameters:
             project_id:
                 required: true
@@ -58,7 +58,7 @@ operations:
     getMergeRequestChanges:
         summary: Shows information about the merge request including its files and changes.
         httpMethod: GET
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}/changes
+        uri: projects/{project_id}/merge_requests/{merge_request_id}/changes
         parameters:
             project_id:
                 required: true
@@ -74,7 +74,7 @@ operations:
     createMergeRequest:
         summary: Creates a new merge request.
         httpMethod: POST
-        uri: /projects/{project_id}/merge_requests
+        uri: projects/{project_id}/merge_requests
         parameters:
             project_id:
                 required: true
@@ -115,7 +115,7 @@ operations:
     updateMergeRequest:
         summary: Updates an existing merge request. You can change branches, title, or even close the MR.
         httpMethod: PUT
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}
+        uri: projects/{project_id}/merge_requests/{merge_request_id}
         parameters:
             project_id:
                 required: true
@@ -162,7 +162,7 @@ operations:
     acceptMergeRequest:
         summary: Merge changes submitted with MR using this API.
         httpMethod: PUT
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}/merge
+        uri: projects/{project_id}/merge_requests/{merge_request_id}/merge
         parameters:
             project_id:
                 required: true
@@ -183,7 +183,7 @@ operations:
     createMergeRequestComment:
         summary: Adds a comment to a merge request.
         httpMethod: POST
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}/comments
+        uri: projects/{project_id}/merge_requests/{merge_request_id}/comments
         parameters:
             project_id:
                 required: true
@@ -205,7 +205,7 @@ operations:
         extends: paginatedOperation
         summary: Adds a comment to a merge request.
         httpMethod: GET
-        uri: /projects/{project_id}/merge_requests/{merge_request_id}/comments
+        uri: projects/{project_id}/merge_requests/{merge_request_id}/comments
         parameters:
             project_id:
                 required: true

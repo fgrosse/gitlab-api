@@ -45,10 +45,10 @@ class GuzzleClientFactory
 
         $baseUrlPath = parse_url($baseUrl, PHP_URL_PATH);
         if (String::endsWith($baseUrlPath, '/api/v3/')) {
-            return $originalBaseUrl;
+            return $baseUrl;
         }
 
-        return $baseUrl.'api/v3';
+        return $baseUrl.'api/v3/';
     }
 
     private static function loadServiceDefinition()

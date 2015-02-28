@@ -16,4 +16,13 @@ class StringTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(String::endsWith('Hello World', 'Hello'));
         $this->assertFalse(String::endsWith('Hello World', 'Hello Worl'));
     }
+
+    public function testStartsWith()
+    {
+        $this->assertTrue(String::startsWith('Hello World', 'H'));
+        $this->assertTrue(String::startsWith('Hello World', 'Hello'));
+        $this->assertTrue(String::startsWith('Hello World', 'Hello World'));
+        $this->assertFalse(String::startsWith('Hello World', 'World'));
+        $this->assertFalse(String::startsWith('Hello World', ' Hello'));
+    }
 }

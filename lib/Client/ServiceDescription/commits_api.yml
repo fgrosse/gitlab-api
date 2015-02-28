@@ -8,7 +8,7 @@ operations:
         extends: paginatedOperation
         summary: Get a list of repository commits in a project.
         httpMethod: GET
-        uri: /projects/{project_id}/repository/commits
+        uri: projects/{project_id}/repository/commits
         parameters:
             project_id:
                 required: true
@@ -24,7 +24,7 @@ operations:
     getCommit:
         summary: Get a specific commit identified by the commit hash or name of a branch or tag.
         httpMethod: GET
-        uri: /projects/{project_id}/repository/commits/{sha}
+        uri: projects/{project_id}/repository/commits/{sha}
         parameters:
             project_id:
                 required: true
@@ -40,19 +40,19 @@ operations:
     getCommitDiff:
         extends: getCommit
         summary: Get a specific commit identified by the commit hash or name of a branch or tag.
-        uri: /projects/{project_id}/repository/commits/{sha}/diff
+        uri: projects/{project_id}/repository/commits/{sha}/diff
 
     getCommitComments:
         extends: getCommit
         summary: Get the comments of a commit in a project.
-        uri: /projects/{project_id}/repository/commits/{sha}/comments
+        uri: projects/{project_id}/repository/commits/{sha}/comments
 
     createCommitComment:
         summary: >
             Adds a comment to a commit. Optionally you can post comments on a specific line of a commit.
             Therefor both path, line_new and line_old are required.
         httpMethod: POST
-        uri: /projects/{project_id}/repository/commits/{sha}/comments
+        uri: projects/{project_id}/repository/commits/{sha}/comments
         parameters:
             project_id:
                 required: true
