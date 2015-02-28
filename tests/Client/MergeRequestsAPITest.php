@@ -23,15 +23,16 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasQueryParameter('state', 'closed', $request);
         $this->assertRequestHasQueryParameter('order_by', 'updated_at', $request);
+        $this->assertRequestHasQueryParameter('sort', 'asc', $request);
         $this->assertRequestHasQueryParameter('page', 3, $request);
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
     }
 
-    public function testSingleMergeRequests()
+    public function testGetMergeRequest()
     {
         $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/single_merge_request.http');
         $projectId = 'fgrosse/example-project';
-        $this->client->singleMergeRequest([
+        $this->client->getMergeRequest([
             'project_id' => $projectId,
             'merge_request_id' => 42,
         ]);
@@ -42,11 +43,11 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('application/json', $request->getHeader('Accept'));
     }
 
-    public function testSingleMergeRequestsChanges()
+    public function testGetMergeRequestsChanges()
     {
         $this->setMockResponse(__DIR__ . '/fixtures/merge_requests/single_merge_request_changes.http');
         $projectId = 'fgrosse/example-project';
-        $this->client->singleMergeRequestChanges([
+        $this->client->getMergeRequestChanges([
             'project_id' => $projectId,
             'merge_request_id' => 42,
         ]);

@@ -18,8 +18,8 @@ use GuzzleHttp\Message\ResponseInterface;
  * Merge Requests API:
  * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md
  * @method array listMergeRequests
- * @method array singleMergeRequest
- * @method array singleMergeRequestChanges
+ * @method array getMergeRequest
+ * @method array getMergeRequestChanges
  * @method array createMergeRequest
  * @method array createMergeRequestComment
  * @method array listMergeRequestComments
@@ -32,11 +32,17 @@ use GuzzleHttp\Message\ResponseInterface;
  * @method array getCommitComments
  * @method array createCommitComment
  *
+ * Issues API
+ * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/issues.md
+ * @method array listIssues
+ * @method array listProjectIssues
+ * @method array getIssue
+ * @method array createIssue
+ *
  * TODO: branches API
  * TODO: deploy_key_multiple_projects API
  * TODO: deploy_keys API
  * TODO: groups API
- * TODO: issues API
  * TODO: labels API
  * TODO: milestones API
  * TODO: notes API
@@ -92,6 +98,16 @@ class GitlabClient extends GuzzleClient
     public function acceptMergeRequest(array $parameters)
     {
         return $this->executeRequestWithBody('acceptMergeRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return ResponseInterface
+     * @throws RequestException When an error is encountered
+     */
+    public function updateIssue(array $parameters)
+    {
+        return $this->executeRequestWithBody('updateIssue', $parameters);
     }
 
     /**

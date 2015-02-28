@@ -1,5 +1,4 @@
 ### Not implemented APIs (yet)
- * commits API
  * deploy_key_multiple_projects API
  * deploy_keys API
  * groups API

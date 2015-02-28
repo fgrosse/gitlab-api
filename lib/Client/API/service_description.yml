@@ -16,3 +16,4 @@ operations:
 imports:
     - merge_requests_api.yml
     - commits_api.yml
+    - issues_api.yml

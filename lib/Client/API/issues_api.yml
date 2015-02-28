@@ -1,0 +1,121 @@
+##################################################################################
+# Gitlab Issues API                                                              #
+# See https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/issues.md         #
+##################################################################################
+
+operations:
+    listIssues:
+        extends: paginatedOperation
+        summary: Get all issues created by authenticated users.
+        httpMethod: GET
+        uri: /issues
+        parameters:
+            state:
+                required: false
+                description: Return all issues or just those that are opened or closed
+                type: string
+                enum: ["all", "opened", "closed"]
+                location: query
+            labels:
+                required: false
+                description: Comma-separated list of label names
+                type: string
+                location: query
+            order_by:
+                required: false
+                description: Return requests ordered by created_at or updated_at fields. Server default is created_at
+                type: string
+                enum: ["created_at", "updated_at"]
+                location: query
+            sort:
+                required: false
+                description: Return requests sorted in asc or desc order. Server default is desc
+                type: string
+                enum: ["asc", "desc"]
+                location: query
+
+    listProjectIssues:
+        extends: listIssues
+        summary: Get a list of project issues.
+        uri: /projects/{project_id}/issues
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            milestone:
+                required: false
+                description: Milestone title
+                type: string
+                location: query
+
+    getIssue:
+        summary: Gets a single project issue.
+        httpMethod: GET
+        uri: /projects/{project_id}/issues/{issue_id}
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            issue_id:
+                required: true
+                description: The ID of a project issue
+                type: string
+                location: uri
+
+    createIssue:
+        summary: Creates a new project issue.
+        httpMethod: POST
+        uri: /projects/{project_id}/issues
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            title:
+                required: true
+                description: The title of an issue
+                type: string
+                location: postField
+            description:
+                required: false
+                description: The description of an issue
+                type: string
+                location: postField
+            assignee_id:
+                required: false
+                description: The ID of a user to assign issue
+                type: integer
+                location: postField
+            milestone_id:
+                required: false
+                description: The ID of a milestone to assign issue
+                type: integer
+                location: postField
+            labels:
+                required: false
+                description: Comma-separated label names for an issue
+                type: string
+                location: postField
+
+    updateIssue:
+        extends: createIssue
+        summary: Updates an existing project issue. This function is also used to mark an issue as closed.
+        httpMethod: PUT
+        uri: /projects/{project_id}/issues/{issue_id}
+        parameters:
+            issue_id:
+                required: true
+                description: The ID of a project's issue
+                type: integer
+                location: uri
+            state_event:
+                required: false
+                description: The state event of an issue ('close' to close issue and 'reopen' to reopen it)
+                type: string
+                enum: ["close", "reopen"]
+                location: postField

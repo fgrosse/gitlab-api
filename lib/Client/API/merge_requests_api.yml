@@ -39,7 +39,7 @@ operations:
                 default: "desc"
                 location: query
 
-    singleMergeRequest:
+    getMergeRequest:
         summary: Shows information about a single merge request.
         httpMethod: GET
         uri: /projects/{project_id}/merge_requests/{merge_request_id}
@@ -55,7 +55,7 @@ operations:
                 type: string
                 location: uri
 
-    singleMergeRequestChanges:
+    getMergeRequestChanges:
         summary: Shows information about the merge request including its files and changes.
         httpMethod: GET
         uri: /projects/{project_id}/merge_requests/{merge_request_id}/changes
