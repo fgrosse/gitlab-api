@@ -6,6 +6,7 @@ use Gitlab\Utils\String;
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Guzzle\Description;
+use Symfony\Component\Yaml\Parser as YamlParser;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -53,9 +54,12 @@ class GuzzleClientFactory
 
     private static function loadServiceDefinition()
     {
-        $descriptionArray = Yaml::parse(__DIR__ . '/ServiceDescription/service_description.yml');
+        $parser = new YamlParser();
+        $fileContents = file_get_contents(__DIR__ . '/ServiceDescription/service_description.yml');
+        $descriptionArray = $parser->parse($fileContents);
         foreach($descriptionArray['imports'] as $apiDescriptionFile) {
-            $apiDescription = Yaml::parse(__DIR__ . "/ServiceDescription/$apiDescriptionFile");
+            $fileContents = file_get_contents(__DIR__ . "/ServiceDescription/$apiDescriptionFile");
+            $apiDescription = $parser->parse($fileContents);
             $descriptionArray = array_merge_recursive($descriptionArray, $apiDescription);
         }
         unset($descriptionArray['imports']);

@@ -17,27 +17,27 @@ use GuzzleHttp\Message\ResponseInterface;
  *
  * Merge Requests API:
  * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md
- * @method array listMergeRequests
- * @method array getMergeRequest
- * @method array getMergeRequestChanges
- * @method array createMergeRequest
- * @method array createMergeRequestComment
- * @method array listMergeRequestComments
+ * @method array listMergeRequests($parameters)
+ * @method array getMergeRequest($parameters)
+ * @method array getMergeRequestChanges($parameters)
+ * @method array createMergeRequest($parameters)
+ * @method array createMergeRequestComment($parameters)
+ * @method array listMergeRequestComments($parameters)
  *
  * Commits API
  * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md
- * @method array listCommits
- * @method array getCommit
- * @method array getCommitDiff
- * @method array getCommitComments
- * @method array createCommitComment
+ * @method array listCommits($parameters)
+ * @method array getCommit($parameters)
+ * @method array getCommitDiff($parameters)
+ * @method array getCommitComments($parameters)
+ * @method array createCommitComment($parameters)
  *
  * Issues API
  * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/issues.md
- * @method array listIssues
- * @method array listProjectIssues
- * @method array getIssue
- * @method array createIssue
+ * @method array listIssues($parameters)
+ * @method array listProjectIssues($parameters)
+ * @method array getIssue($parameters)
+ * @method array createIssue($parameters)
  *
  * TODO: branches API
  * TODO: deploy_key_multiple_projects API
@@ -69,11 +69,10 @@ class GitlabClient extends GuzzleClient
     }
 
     /**
-     * @deprecated use the static factory method to retrieve a fully configured gitlab GitlabClient
      * @param ClientInterface $client
      * @param DescriptionInterface $description
      * @param array $config
-     * @see factory
+     * @see factory use the static factory method to retrieve a fully configured gitlab GitlabClient
      */
     public function __construct(ClientInterface $client, DescriptionInterface $description, array $config = [])
     {
