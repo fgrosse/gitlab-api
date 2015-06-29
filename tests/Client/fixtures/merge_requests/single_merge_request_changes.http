@@ -48,7 +48,7 @@ Content-Type: application/json
     "new_path": "VERSION",
     "a_mode": "100644",
     "b_mode": "100644",
-    "diff": "--- a/VERSION\ +++ b/VERSION\ @@ -1 +1 @@\ -1.9.7\ +1.9.8",
+    "diff": "--- a/VERSION\\ +++ b/VERSION\\ @@ -1 +1 @@\\ -1.9.7\\ +1.9.8",
     "new_file": false,
     "renamed_file": false,
     "deleted_file": false

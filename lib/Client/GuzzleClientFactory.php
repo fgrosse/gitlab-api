@@ -2,12 +2,12 @@
 
 namespace Gitlab\Client;
 
+use Exception;
 use Gitlab\Utils\String;
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Guzzle\Description;
 use Symfony\Component\Yaml\Parser as YamlParser;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * The GuzzleClientFactory can created fully configured instances of a GitlabClient.
@@ -16,7 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 class GuzzleClientFactory
 {
     /**
-     * Create a new instance of GitlabClient (automatically configured with the service.yml)
+     * Create a new instance of GitlabClient
      * @param array $config
      * @return GitlabClient
      */
@@ -26,7 +26,10 @@ class GuzzleClientFactory
         $config = Collection::fromConfig($config, $default = [], $required);
         $config['base_url'] = self::completeBaseUrl($config['base_url']);
 
-        $description = self::loadServiceDefinition();
+        $serviceDescriptionFilePath = __DIR__ . '/ServiceDescription/service_description.yml';
+        $definition = self::loadServiceDefinition($serviceDescriptionFilePath);
+        self::emulateGuzzle3ResponseModels($definition);
+        $description = new Description($definition);
 
         $client = new Client($config->toArray());
         $client->setDefaultOption('headers/accept', 'application/json');
@@ -34,7 +37,9 @@ class GuzzleClientFactory
         $privateTokenPlugin = new PrivateTokenPlugin($config['api_token']);
         $client->getEmitter()->attach($privateTokenPlugin);
 
-        return new GitlabClient($client, $description);
+        $gitlabClient = new GitlabClient($client, $description);
+        $gitlabClient->getEmitter()->attach(new ResponseModelProcessor($description));
+        return $gitlabClient;
     }
 
     private static function completeBaseUrl($originalBaseUrl)
@@ -52,17 +57,57 @@ class GuzzleClientFactory
         return $baseUrl.'api/v3/';
     }
 
-    private static function loadServiceDefinition()
+    private static function loadServiceDefinition($serviceDescriptionFilePath)
     {
         $parser = new YamlParser();
-        $fileContents = file_get_contents(__DIR__ . '/ServiceDescription/service_description.yml');
+        $fileContents = self::loadFileContents($serviceDescriptionFilePath);
         $descriptionArray = $parser->parse($fileContents);
-        foreach($descriptionArray['imports'] as $apiDescriptionFile) {
-            $fileContents = file_get_contents(__DIR__ . "/ServiceDescription/$apiDescriptionFile");
-            $apiDescription = $parser->parse($fileContents);
-            $descriptionArray = array_merge_recursive($descriptionArray, $apiDescription);
+
+        if (isset($descriptionArray['imports'])) {
+            self::loadServiceDefinitionImports($serviceDescriptionFilePath, $descriptionArray);
+        }
+
+        return $descriptionArray;
+    }
+
+    private static function loadFileContents($path)
+    {
+        $content = file_get_contents($path);
+        if ($content === false) {
+            throw new Exception("Could not file from path \"$path\"");
+        }
+
+        return $content;
+    }
+
+    private static function loadServiceDefinitionImports($serviceDescriptionFilePath, array &$descriptionArray)
+    {
+        foreach ($descriptionArray['imports'] as $apiDescriptionFile) {
+            $importedDescriptionFile = dirname($serviceDescriptionFilePath) . "/$apiDescriptionFile";
+            $importedDescription = self::loadServiceDefinition($importedDescriptionFile);
+            $descriptionArray = array_merge_recursive($descriptionArray, $importedDescription);
         }
         unset($descriptionArray['imports']);
-        return new Description($descriptionArray);
+    }
+
+    private static function emulateGuzzle3ResponseModels(array &$descriptionArray)
+    {
+        if (!isset($descriptionArray['models']['jsonResponse'])) {
+            $descriptionArray['models']['jsonResponse'] = [
+                'type' => 'object',
+                'additionalProperties' => ['location' => 'json']
+            ];
+        }
+
+        foreach ($descriptionArray['operations'] as &$operation) {
+            if (empty($operation['responseModel'])) {
+                $operation['responseModel'] = 'jsonResponse';
+            }
+
+            if (isset($operation['responseClass'])) {
+                $operation['responseParser'] = $operation['responseClass'];
+                unset($operation['responseClass']);
+            }
+        }
     }
 }

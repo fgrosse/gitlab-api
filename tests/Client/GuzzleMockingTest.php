@@ -10,7 +10,6 @@ class GuzzleMockingTest extends PHPUnit_Framework_TestCase
 {
     public function testGuzzleServicesIssue70()
     {
-        $this->markTestSkipped('Skipped until https://github.com/guzzle/guzzle-services/issues/70 is resolved');
         $client = GitlabClient::factory([
             'base_url' => 'https://example.com/gitlab/api/v3',
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
