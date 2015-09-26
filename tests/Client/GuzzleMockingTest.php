@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of fgrosse/gitlab-api.
+ *
+ * Copyright © Friedrich Große <friedrich.grosse@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Client;
 
@@ -15,7 +23,7 @@ class GuzzleMockingTest extends PHPUnit_Framework_TestCase
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);
 
-        $fixturePath = __DIR__ . '/fixtures/issues/list_issues.http';
+        $fixturePath = __DIR__.'/fixtures/issues/list_issues.http';
         $mock = new Mock([$fixturePath]);
         $client->getHttpClient()->getEmitter()->attach($mock);
 

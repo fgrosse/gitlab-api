@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of fgrosse/gitlab-api.
+ *
+ * Copyright © Friedrich Große <friedrich.grosse@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Gitlab\Client;
 
@@ -59,7 +67,7 @@ use GuzzleHttp\Message\ResponseInterface;
 class GitlabClient extends GuzzleClient
 {
     /**
-     * Factory method to create a fully configured GitlabClient
+     * Factory method to create a fully configured GitlabClient.
      * @param array $config
      * @return GitlabClient
      */
@@ -111,7 +119,7 @@ class GitlabClient extends GuzzleClient
 
     /**
      * This is a hack to allow guzzle PUT requests to have a body
-     * TODO submit github issue for that
+     * TODO submit github issue for that.
      * @param $commandName
      * @param array $parameters
      * @return ResponseInterface

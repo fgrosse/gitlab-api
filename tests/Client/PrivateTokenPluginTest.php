@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of fgrosse/gitlab-api.
+ *
+ * Copyright © Friedrich Große <friedrich.grosse@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Gitlab\Test\Client;
 
@@ -22,7 +30,7 @@ class PrivateTokenPluginTest extends PHPUnit_Framework_TestCase
                 ->with(PrivateTokenPlugin::HEADER_NAME, $token)
                 ->once();
 
-        /** @var BeforeEvent $event */
+        /* @var BeforeEvent $event */
         $plugin->onBefore($event, 'name');
     }
 }
