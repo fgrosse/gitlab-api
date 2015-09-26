@@ -4,6 +4,7 @@
 [![HHVM Status](http://hhvm.h4cc.de/badge/fgrosse/gitlab-api.png)](http://hhvm.h4cc.de/package/fgrosse/gitlab-api)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/fgrosse/gitlab-api/badge.svg)](https://travis-ci.org/fgrosse/gitlab-api)
 [![Coverage Status](https://coveralls.io/repos/fgrosse/gitlab-api/badge.svg?branch=master&service=github)](https://coveralls.io/github/fgrosse/gitlab-api?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fgrosse/gitlab-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fgrosse/gitlab-api/?branch=master)
 
 [![Latest Stable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/stable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 [![Total Downloads](https://poser.pugx.org/fgrosse/gitlab-api/downloads.png)](https://packagist.org/packages/fgrosse/gitlab-api)
