@@ -30,8 +30,11 @@ class GuzzleClientFactory
      */
     public static function createClient($config = [])
     {
+        $default = [
+            'ssl.certificate_authority' => 'system',
+        ];
         $required = ['base_url', 'api_token'];
-        $config = Collection::fromConfig($config, $default = [], $required);
+        $config = Collection::fromConfig($config, $default, $required);
         $config['base_url'] = self::completeBaseUrl($config['base_url']);
 
         $serviceDescriptionFilePath = __DIR__.'/ServiceDescription/service_description.yml';
