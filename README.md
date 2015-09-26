@@ -18,6 +18,7 @@ You can have a quick overview of the implemented gitlab APIs in the yml files in
  * [Commits](lib/Client/ServiceDescription/commits_api.yml)
  * [Issues](lib/Client/ServiceDescription/issues_api.yml)
  * [Merge Requests](lib/Client/ServiceDescription/merge_requests_api.yml)
+ * [Labels](lib/Client/ServiceDescription/labels_api.yml)
 
 ## Dependencies
 
@@ -61,7 +62,6 @@ parameters for each API call.
  * deploy_key_multiple_projects API
  * deploy_keys API
  * groups API
- * labels API
  * milestones API
  * notes API
  * oauth2 API
