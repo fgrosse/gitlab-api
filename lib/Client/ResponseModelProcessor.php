@@ -27,7 +27,7 @@ class ResponseModelProcessor implements SubscriberInterface
 
     public function getEvents()
     {
-        return ['process' => ['onProcess', ]];
+        return ['process' => ['onProcess']];
     }
 
     public function onProcess(ProcessEvent $event)
@@ -55,10 +55,10 @@ class ResponseModelProcessor implements SubscriberInterface
         }
 
         if (in_array(ResponseParser::class, class_implements($responseParser)) == false) {
-            throw new RuntimeException("Response parser {$responseParser} does not implement " . ResponseParser::class);
+            throw new RuntimeException("Response parser {$responseParser} does not implement ".ResponseParser::class);
         }
 
-        /** @var ResponseParser $responseParser */
+        /* @var ResponseParser $responseParser */
         $parsedResponse = $responseParser::fromArray($result);
         $event->setResult($parsedResponse);
     }

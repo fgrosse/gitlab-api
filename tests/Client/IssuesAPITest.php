@@ -14,7 +14,7 @@ class IssuesAPITest extends GitlabClientTest
 {
     public function testListIssues()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/issues/list_issues.http');
+        $this->setMockResponse(__DIR__.'/fixtures/issues/list_issues.http');
         $this->client->listIssues([
             'state'      => 'closed',
             'labels'     => 'foo,bar',
@@ -38,7 +38,7 @@ class IssuesAPITest extends GitlabClientTest
 
     public function testListProjectIssues()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/issues/list_issues.http');
+        $this->setMockResponse(__DIR__.'/fixtures/issues/list_issues.http');
         $projectId = 'fgrosse/example-project';
         $this->client->listProjectIssues([
             'project_id' => $projectId,
@@ -66,7 +66,7 @@ class IssuesAPITest extends GitlabClientTest
 
     public function testGetIssue()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/issues/single_issue.http');
+        $this->setMockResponse(__DIR__.'/fixtures/issues/single_issue.http');
         $projectId = 'fgrosse/example-project';
         $this->client->getIssue([
             'project_id' => $projectId,
@@ -81,7 +81,7 @@ class IssuesAPITest extends GitlabClientTest
 
     public function testCreateIssue()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/issues/create_issue.http');
+        $this->setMockResponse(__DIR__.'/fixtures/issues/create_issue.http');
         $projectId = 'fgrosse/example-project';
         $this->client->createIssue([
             'project_id'   => $projectId,
@@ -105,7 +105,7 @@ class IssuesAPITest extends GitlabClientTest
 
     public function testUpdateIssue()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/issues/update_issue.http');
+        $this->setMockResponse(__DIR__.'/fixtures/issues/update_issue.http');
         $projectId = 'fgrosse/example-project';
         $issueId = 123;
         $this->client->updateIssue([

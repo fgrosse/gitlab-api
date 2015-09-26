@@ -23,7 +23,7 @@ class GuzzleClientFactoryTest extends PHPUnit_Framework_TestCase
             'https://example.com/gitlab/',
             'https://example.com/gitlab/api/v3',
             'https://example.com/gitlab/api/v3/',
-            'https://example.com:8080/gitlab/api/v3'
+            'https://example.com:8080/gitlab/api/v3',
         ];
 
         foreach ($baseUrls as $baseUrl) {
@@ -32,7 +32,7 @@ class GuzzleClientFactoryTest extends PHPUnit_Framework_TestCase
                 'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
             ]);
             $baseUrlPath = parse_url($client->getHttpClient()->getBaseUrl(), PHP_URL_PATH);
-            $this->assertEquals("/gitlab/api/v3/", $baseUrlPath);
+            $this->assertEquals('/gitlab/api/v3/', $baseUrlPath);
         }
     }
 
@@ -53,6 +53,6 @@ class GuzzleClientFactoryTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $this->fail("Expected the guzzle client to have the " . PrivateTokenPlugin::class);
+        $this->fail('Expected the guzzle client to have the '.PrivateTokenPlugin::class);
     }
 }

@@ -13,7 +13,7 @@ namespace Gitlab\Client;
 interface ResponseParser
 {
     /**
-     * Unmarshal a response object from an array
+     * Unmarshal a response object from an array.
      * @param array $data
      * @return mixed
      */

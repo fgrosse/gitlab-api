@@ -30,7 +30,7 @@ class PrivateTokenPluginTest extends PHPUnit_Framework_TestCase
                 ->with(PrivateTokenPlugin::HEADER_NAME, $token)
                 ->once();
 
-        /** @var BeforeEvent $event */
+        /* @var BeforeEvent $event */
         $plugin->onBefore($event, 'name');
     }
 }

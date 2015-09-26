@@ -23,7 +23,7 @@ class GuzzleMockingTest extends PHPUnit_Framework_TestCase
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);
 
-        $fixturePath = __DIR__ . '/fixtures/issues/list_issues.http';
+        $fixturePath = __DIR__.'/fixtures/issues/list_issues.http';
         $mock = new Mock([$fixturePath]);
         $client->getHttpClient()->getEmitter()->attach($mock);
 

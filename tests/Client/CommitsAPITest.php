@@ -14,7 +14,7 @@ class CommitsAPITest extends GitlabClientTest
 {
     public function testListCommits()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/commits/list_commits.http');
+        $this->setMockResponse(__DIR__.'/fixtures/commits/list_commits.http');
         $projectId = 'fgrosse/example-project';
         $this->client->listCommits([
             'project_id' => $projectId,
@@ -34,7 +34,7 @@ class CommitsAPITest extends GitlabClientTest
 
     public function testGetCommit()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/commits/get_commit.http');
+        $this->setMockResponse(__DIR__.'/fixtures/commits/get_commit.http');
         $projectId = 'fgrosse/example-project';
         $commitHash = 'a0ec05a1aa822643a98d5b86aceabf29985ebc10';
         $this->client->getCommit([
@@ -50,7 +50,7 @@ class CommitsAPITest extends GitlabClientTest
 
     public function testGetDiff()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/commits/get_commit_diff.http');
+        $this->setMockResponse(__DIR__.'/fixtures/commits/get_commit_diff.http');
         $projectId = 'fgrosse/example-project';
         $commitHash = 'a0ec05a1aa822643a98d5b86aceabf29985ebc10';
         $this->client->getCommitDiff([
@@ -66,7 +66,7 @@ class CommitsAPITest extends GitlabClientTest
 
     public function testGetComments()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/commits/get_commit_comments.http');
+        $this->setMockResponse(__DIR__.'/fixtures/commits/get_commit_comments.http');
         $projectId = 'fgrosse/example-project';
         $commitHash = 'a0ec05a1aa822643a98d5b86aceabf29985ebc10';
         $this->client->getCommitComments([
@@ -82,7 +82,7 @@ class CommitsAPITest extends GitlabClientTest
 
     public function testCreateComment()
     {
-        $this->setMockResponse(__DIR__ . '/fixtures/commits/create_commit_comment.http');
+        $this->setMockResponse(__DIR__.'/fixtures/commits/create_commit_comment.http');
         $projectId = 'fgrosse/example-project';
         $commitHash = 'a0ec05a1aa822643a98d5b86aceabf29985ebc10';
         $this->client->createCommitComment([

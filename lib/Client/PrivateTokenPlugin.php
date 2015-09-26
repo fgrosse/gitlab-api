@@ -20,7 +20,7 @@ class PrivateTokenPlugin implements SubscriberInterface
     private $privateToken;
 
     /**
-     * Create a new instance of PrivateTokenPlugin
+     * Create a new instance of PrivateTokenPlugin.
      * @param string $privateToken the private token that is used to authenticate the requests to gitlab
      */
     public function __construct($privateToken)
@@ -31,7 +31,7 @@ class PrivateTokenPlugin implements SubscriberInterface
     public function getEvents()
     {
         return [
-            'before' => [ 'onBefore' ],
+            'before' => ['onBefore'],
         ];
     }
 

@@ -67,7 +67,7 @@ use GuzzleHttp\Message\ResponseInterface;
 class GitlabClient extends GuzzleClient
 {
     /**
-     * Factory method to create a fully configured GitlabClient
+     * Factory method to create a fully configured GitlabClient.
      * @param array $config
      * @return GitlabClient
      */
@@ -119,7 +119,7 @@ class GitlabClient extends GuzzleClient
 
     /**
      * This is a hack to allow guzzle PUT requests to have a body
-     * TODO submit github issue for that
+     * TODO submit github issue for that.
      * @param $commandName
      * @param array $parameters
      * @return ResponseInterface

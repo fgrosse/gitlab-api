@@ -13,8 +13,9 @@
 # There is nothing special here for you to see.              #
 ##############################################################
 
-function getParameter($name, array $argv) {
-    $envName = 'GITLAB_' . preg_replace('/\s|-/', '_', strtoupper($name));
+function getParameter($name, array $argv)
+{
+    $envName = 'GITLAB_'.preg_replace('/\s|-/', '_', strtoupper($name));
     if (isset($_ENV[$envName])) {
         return $_ENV[$envName];
     }
@@ -31,6 +32,7 @@ function getParameter($name, array $argv) {
     exit(1);
 }
 
-function printError($text) {
-    fwrite(STDERR, $text . PHP_EOL);
+function printError($text)
+{
+    fwrite(STDERR, $text.PHP_EOL);
 }
