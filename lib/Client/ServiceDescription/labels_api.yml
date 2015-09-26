@@ -1,0 +1,72 @@
+##################################################################################
+# Gitlab Labels API                                                              #
+# See https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/labels.md         #
+##################################################################################
+
+operations:
+    listLabels:
+        summary: Get all labels for a given project.
+        httpMethod: GET
+        uri: projects/{project_id}/labels
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+
+    createLabel:
+        summary: Creates a new label for given repository with given name and color.
+        httpMethod: POST
+        uri: projects/{project_id}/labels
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            name:
+                required: true
+                description: The name of the label
+                type: string
+                location: postField
+            color:
+                required: true
+                description: Color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB)
+                type: string
+                location: postField
+
+    updateLabel:
+        extends: createLabel
+        summary: >
+            Updates an existing label with new name or now color.
+            Either the new name or new color is required to update the label.
+        httpMethod: PUT
+        uri: projects/{project_id}/labels
+        parameters:
+            new_name:
+                required: false
+                description: The new name of the label
+                type: string
+                location: postField
+            color:
+                required: false
+                description: New color of the label given in 6-digit hex notation with leading '#' sign (e.g. #FFAABB)
+                type: string
+                location: postField
+
+    deleteLabel:
+        summary: Deletes a label given by its name.
+        httpMethod: DELETE
+        uri: projects/{project_id}/labels
+        parameters:
+            project_id:
+                required: true
+                description: The ID of a project
+                type: string
+                location: uri
+            name:
+                required: true
+                description: The name of the label
+                type: string
+                location: postField

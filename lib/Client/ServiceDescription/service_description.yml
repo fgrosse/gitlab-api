@@ -17,3 +17,4 @@ imports:
     - commits_api.yml
     - issues_api.yml
     - merge_requests_api.yml
+    - labels_api.yml
