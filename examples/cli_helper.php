@@ -1,4 +1,13 @@
 <?php
+/*
+ * This file is part of fgrosse/gitlab-api.
+ *
+ * Copyright © Friedrich Große <friedrich.grosse@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 ##############################################################
 # This file is merely a small helper for the other examples. #
 # There is nothing special here for you to see.              #
