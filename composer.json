@@ -1,6 +1,6 @@
 {
     "name": "fgrosse/gitlab-api",
-    "description": "A PHP client for the gitlab API",
+    "description": "A guzzle 5 client for the gitlab API using service descriptions",
     "type": "library",
     "homepage": "https://github.com/fgrosse/gitlab-api",
     "license": "MIT",
