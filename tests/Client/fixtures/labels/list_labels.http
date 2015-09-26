@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+    {
+        "name": "Awesome",
+        "color": "#DD10AA"
+    },
+    {
+        "name": "Documentation",
+        "color": "#1E80DD"
+    },
+    {
+        "name": "Feature",
+        "color": "#11FF22"
+    },
+    {
+        "name": "Bug",
+        "color": "#EE1122"
+    }
+]

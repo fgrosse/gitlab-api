@@ -14,7 +14,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Command\Command;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 
 /**
@@ -24,16 +23,18 @@ use GuzzleHttp\Message\ResponseInterface;
  * The following magic methods are available through the service definition:
  *
  * Merge Requests API:
- * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md
+ * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/merge_requests.md
  * @method array listMergeRequests($parameters)
  * @method array getMergeRequest($parameters)
  * @method array getMergeRequestChanges($parameters)
  * @method array createMergeRequest($parameters)
+ * @method array updateMergeRequest($parameters)
  * @method array createMergeRequestComment($parameters)
  * @method array listMergeRequestComments($parameters)
+ * @method array acceptMergeRequest($parameters)
  *
  * Commits API
- * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md
+ * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/commits.md
  * @method array listCommits($parameters)
  * @method array getCommit($parameters)
  * @method array getCommitDiff($parameters)
@@ -41,17 +42,24 @@ use GuzzleHttp\Message\ResponseInterface;
  * @method array createCommitComment($parameters)
  *
  * Issues API
- * @see https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/issues.md
+ * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/issues.md
  * @method array listIssues($parameters)
  * @method array listProjectIssues($parameters)
  * @method array getIssue($parameters)
  * @method array createIssue($parameters)
+ * @method array updateIssue($parameters)
+ *
+ * Labels API
+ * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/labels.md
+ * @method array listLabels($parameters)
+ * @method array createLabel($parameters)
+ * @method array updateLabel($parameters)
+ * @method array deleteLabel($parameters)
  *
  * TODO: branches API
  * TODO: deploy_key_multiple_projects API
  * TODO: deploy_keys API
  * TODO: groups API
- * TODO: labels API
  * TODO: milestones API
  * TODO: notes API
  * TODO: oauth2 API
@@ -77,6 +85,19 @@ class GitlabClient extends GuzzleClient
     }
 
     /**
+     * A list of operations that are executed with a body.
+     * TODO: this is a hack until  https://github.com/guzzle/guzzle-services supports request bodies on PUT or DELETE
+     * @var string[]
+     */
+    private $executeWithBody = [
+        'updateMergeRequest',
+        'acceptMergeRequest',
+        'updateIssue',
+        'updateLabel',
+        'deleteLabel',
+    ];
+
+    /**
      * @param ClientInterface $client
      * @param DescriptionInterface $description
      * @param array $config
@@ -87,38 +108,17 @@ class GitlabClient extends GuzzleClient
         parent::__construct($client, $description, $config);
     }
 
-    /**
-     * @param array $parameters
-     * @return ResponseInterface
-     * @throws RequestException When an error is encountered
-     */
-    public function updateMergeRequest(array $parameters)
+    public function __call($name, array $arguments)
     {
-        return $this->executeRequestWithBody('updateMergeRequest', $parameters);
+        if (in_array($name, $this->executeWithBody)) {
+            return $this->executeRequestWithBody($name, $arguments[0]);
+        }
+
+        return parent::__call($name, $arguments);
     }
 
     /**
-     * @param array $parameters
-     * @return ResponseInterface
-     * @throws RequestException When an error is encountered
-     */
-    public function acceptMergeRequest(array $parameters)
-    {
-        return $this->executeRequestWithBody('acceptMergeRequest', $parameters);
-    }
-
-    /**
-     * @param array $parameters
-     * @return ResponseInterface
-     * @throws RequestException When an error is encountered
-     */
-    public function updateIssue(array $parameters)
-    {
-        return $this->executeRequestWithBody('updateIssue', $parameters);
-    }
-
-    /**
-     * This is a hack to allow guzzle PUT requests to have a body
+     * This is a hack to allow guzzle PUT or DELETE requests to have a body.
      * TODO submit github issue for that.
      * @param $commandName
      * @param array $parameters
