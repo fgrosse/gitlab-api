@@ -17,17 +17,47 @@ You can have a quick overview of the implemented gitlab APIs in the yml files in
 
 **Work in progress**
 
-I am currently working on implementing the remaining APIs as well as wrapping the responses in appropriate self
-documenting entities. Furthermore I think I will create a facade around the currently used guzzle client to get rid of 
-the untyped array of parameters which you currently have to pass for the guzzle service description.
-Until I am content with the changes there will not be a stable version of this client.
-
-If you still want to use the API as it is right now have a look at the tests and or the examples folder:
-
 ### Implemented APIs
  * Commits
  * Issues
  * Merge Requests
+
+## Dependencies
+
+Gitlab-api requires at least `PHP 5.5` and also been successfully tested using `PHP 7` and `HHVM`.
+
+## Installation
+
+The preferred way to install this library is to rely on [Composer][3]:
+
+```bash
+$ composer require fgrosse/gitlab-api
+```
+
+## Usage
+
+The API is still work in progress and the actual usage might change in the future. For now you can use the `GitlabClient`
+directly like this:
+
+```php
+$client = GitlabClient::factory([
+    'base_url'  => $baseUrl,
+    'api_token' => $token,
+]);
+
+$mergeRequests = $client->listMergeRequests([
+    'project_id' => $project,
+    'state'      => 'closed',
+    'order_by'   => 'updated_at',
+    'sort'       => 'asc',
+    'page'       => 0,
+    'per_page'   => 5,
+]);
+```
+
+In the future I will probably create a facade around the client which follows a well defined interface.
+Until then you need to checkout the [lib/Client/ServiceDescription](lib/Client/ServiceDescription) to see the available
+parameters for each API call.
 
 ### Not implemented APIs (yet)
  * deploy_key_multiple_projects API
@@ -52,3 +82,4 @@ This library is distributed under the [MIT License](LICENSE).
 
 [1]: https://about.gitlab.com/
 [2]: https://github.com/gitlabhq/gitlabhq/tree/master/doc/api
+[3]: https://getcomposer.org/
