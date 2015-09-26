@@ -1,6 +1,6 @@
 ##################################################################################
 # Gitlab Merge Requests API                                                      #
-# See https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md #
+# See https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/merge_requests.md #
 ##################################################################################
 
 operations:

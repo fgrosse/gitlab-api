@@ -11,13 +11,10 @@
 [![Latest Unstable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/unstable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 [![License](https://poser.pugx.org/fgrosse/gitlab-api/license.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 
-
 This is a php client for the [gitlab][1] API. This client bases on Guzzle 5 with service descriptions.
 You can have a quick overview of the implemented gitlab APIs in the yml files in [lib/Client/ServiceDescription][6].
 
-**Work in progress**
-
-### Implemented APIs
+### Implemented APIs (Gitlab ~7.7)
  * [Commits](lib/Client/ServiceDescription/commits_api.yml)
  * [Issues](lib/Client/ServiceDescription/issues_api.yml)
  * [Merge Requests](lib/Client/ServiceDescription/merge_requests_api.yml)

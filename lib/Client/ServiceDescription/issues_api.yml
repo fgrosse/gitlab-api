@@ -1,6 +1,6 @@
 ##################################################################################
 # Gitlab Issues API                                                              #
-# See https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/issues.md         #
+# See https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/issues.md         #
 ##################################################################################
 
 operations:

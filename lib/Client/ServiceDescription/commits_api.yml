@@ -1,6 +1,6 @@
 ##################################################################################
 # Gitlab Commits API                                                             #
-# See https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/commits.md        #
+# See https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/commits.md        #
 ##################################################################################
 
 operations:
