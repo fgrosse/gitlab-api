@@ -25,6 +25,7 @@ You can have a quick overview of the implemented gitlab APIs in the yml files in
 ## Dependencies
 
 Gitlab-api requires at least `PHP 5.5` and also been successfully tested using `PHP 7` and `HHVM`.
+Furthermore the whole client is build upon the awesome [Guzzle Services][4] by [Michael Dowling][5].
 
 ## Installation
 
@@ -83,3 +84,5 @@ This library is distributed under the [MIT License](LICENSE).
 [1]: https://about.gitlab.com/
 [2]: https://github.com/gitlabhq/gitlabhq/tree/master/doc/api
 [3]: https://getcomposer.org/
+[4]: https://github.com/guzzle/guzzle-services
+[5]: https://github.com/mtdowling
