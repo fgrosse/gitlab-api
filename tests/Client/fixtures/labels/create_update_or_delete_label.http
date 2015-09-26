@@ -1,2 +1,7 @@
 HTTP/1.1 200 OK
 Content-Type: application/json
+
+{
+    "name": "Awesome",
+    "color": "#DD10AA"
+}
