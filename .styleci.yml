@@ -11,3 +11,4 @@ disabled:
   - unalign_equals
   - unalign_double_arrow
   - phpdoc_separation
+  - phpdoc_short_description
