@@ -11,7 +11,7 @@
 namespace Gitlab\Client;
 
 use Exception;
-use Gitlab\Utils\String;
+use Gitlab\Utils\StringUtil;
 use GuzzleHttp\Client;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Guzzle\Description;
@@ -53,12 +53,12 @@ class GuzzleClientFactory
     private static function completeBaseUrl($originalBaseUrl)
     {
         $baseUrl = $originalBaseUrl;
-        if (String::endsWith($baseUrl, '/') == false) {
+        if (StringUtil::endsWith($baseUrl, '/') == false) {
             $baseUrl .= '/';
         }
 
         $baseUrlPath = parse_url($baseUrl, PHP_URL_PATH);
-        if (String::endsWith($baseUrlPath, '/api/v3/')) {
+        if (StringUtil::endsWith($baseUrlPath, '/api/v3/')) {
             return $baseUrl;
         }
 

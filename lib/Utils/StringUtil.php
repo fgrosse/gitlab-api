@@ -10,7 +10,7 @@
 
 namespace Gitlab\Utils;
 
-abstract class String
+abstract class StringUtil
 {
     public static function startsWith($haystack, $needle)
     {
