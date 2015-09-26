@@ -18,5 +18,5 @@ script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-  # code coverage currently does not seem to be supported on travis php 7 or hhvm
+  - composer require --no-interaction satooshi/php-coveralls:dev-master
   - vendor/bin/coveralls --verbose
