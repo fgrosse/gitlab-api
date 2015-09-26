@@ -1,2 +1,5 @@
 /vendor/
 .idea
+
+# Test coverage reports
+clover.xml
