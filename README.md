@@ -1,5 +1,16 @@
 ### PHP Gitlab API
 
+[![Build Status](https://secure.travis-ci.org/fgrosse/gitlab-api.png?branch=master)](http://travis-ci.org/fgrosse/gitlab-api)
+[![HHVM Status](http://hhvm.h4cc.de/badge/fgrosse/gitlab-api.png)](http://hhvm.h4cc.de/package/fgrosse/gitlab-api)
+[![PHP 7 ready](http://php7ready.timesplinter.ch/fgrosse/gitlab-api/badge.svg)](https://travis-ci.org/fgrosse/gitlab-api)
+[![Coverage Status](https://coveralls.io/repos/fgrosse/gitlab-api/badge.svg?branch=master&service=github)](https://coveralls.io/github/fgrosse/gitlab-api?branch=master)
+
+[![Latest Stable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/stable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
+[![Total Downloads](https://poser.pugx.org/fgrosse/gitlab-api/downloads.png)](https://packagist.org/packages/fgrosse/gitlab-api)
+[![Latest Unstable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/unstable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
+[![License](https://poser.pugx.org/fgrosse/gitlab-api/license.png)](https://packagist.org/packages/fgrosse/gitlab-api)
+
+
 This is a php client for the [gitlab][1] API. This client bases on Guzzle 5 with service descriptions.
 You can have a quick overview of the implemented gitlab APIs in the yml files in `lib/Client/ServiceDescription`.
 
@@ -33,6 +44,10 @@ If you still want to use the API as it is right now have a look at the tests and
  * session API
  * system_hooks API
  * users API
+
+## License
+
+This library is distributed under the [MIT License](LICENSE).
 
 [1]: https://about.gitlab.com/
 [2]: https://github.com/gitlabhq/gitlabhq/tree/master/doc/api
