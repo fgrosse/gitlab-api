@@ -13,14 +13,14 @@
 
 
 This is a php client for the [gitlab][1] API. This client bases on Guzzle 5 with service descriptions.
-You can have a quick overview of the implemented gitlab APIs in the yml files in `lib/Client/ServiceDescription`.
+You can have a quick overview of the implemented gitlab APIs in the yml files in [lib/Client/ServiceDescription][6].
 
 **Work in progress**
 
 ### Implemented APIs
- * Commits
- * Issues
- * Merge Requests
+ * [Commits](lib/Client/ServiceDescription/commits_api.yml)
+ * [Issues](lib/Client/ServiceDescription/issues_api.yml)
+ * [Merge Requests](lib/Client/ServiceDescription/merge_requests_api.yml)
 
 ## Dependencies
 
@@ -57,7 +57,7 @@ $mergeRequests = $client->listMergeRequests([
 ```
 
 In the future I will probably create a facade around the client which follows a well defined interface.
-Until then you need to checkout the [lib/Client/ServiceDescription](lib/Client/ServiceDescription) to see the available
+Until then you need to checkout the [lib/Client/ServiceDescription][6] to see the available
 parameters for each API call.
 
 ### Not implemented APIs (yet)
@@ -86,3 +86,4 @@ This library is distributed under the [MIT License](LICENSE).
 [3]: https://getcomposer.org/
 [4]: https://github.com/guzzle/guzzle-services
 [5]: https://github.com/mtdowling
+[6]: lib/Client/ServiceDescription
