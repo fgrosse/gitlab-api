@@ -28,14 +28,14 @@ try {
     $client = new HttpGitlabClient($guzzleClient);
 
     $mergeRequests = $client->listMergeRequests($project,
-        $state='closed',
-        $order='updated_at',
-        $sort='asc',
-        $page=1, $perPage=5
+        $state = 'closed',
+        $order = 'updated_at',
+        $sort = 'asc',
+        $page = 1, $perPage = 5
     );
 
     foreach ($mergeRequests as $mergeRequest) {
-        echo $mergeRequest . PHP_EOL;
+        echo $mergeRequest.PHP_EOL;
     }
 } catch (Exception $exception) {
     printError('An Exception of type '.get_class($exception).' occurred:');

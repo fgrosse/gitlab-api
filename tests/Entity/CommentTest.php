@@ -19,15 +19,15 @@ class CommentTest extends PHPUnit_Framework_TestCase
     public function testFromArray()
     {
         $actual = Comment::fromArray([
-            'author'=> [
-                'id'=> 1,
-                'username'=> 'admin',
-                'email'=> 'admin@example.com',
-                'name'=> 'Administrator',
-                'blocked'=> false,
-                'created_at'=> '2012-04-29T08=>46=>00Z'
+            'author' => [
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'admin@example.com',
+                'name' => 'Administrator',
+                'blocked' => false,
+                'created_at' => '2012-04-29T08=>46=>00Z',
             ],
-            'note'=> 'text1'
+            'note' => 'text1',
         ]);
 
         $this->assertEquals('text1', $actual->note);

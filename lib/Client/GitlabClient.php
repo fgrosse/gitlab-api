@@ -24,5 +24,5 @@ interface GitlabClient
      * @param int $perPage
      * @return \Gitlab\Entity\MergeRequest[]
      */
-    public function listMergeRequests($projectId, $state=null, $orderBy=null, $sort=null, $page=null, $perPage=null);
+    public function listMergeRequests($projectId, $state = null, $orderBy = null, $sort = null, $page = null, $perPage = null);
 }

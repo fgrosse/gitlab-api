@@ -19,7 +19,7 @@ class HttpGitlabClient implements GitlabClient
         $this->client = $client;
     }
 
-    public function listMergeRequests($projectId, $state=null, $orderBy=null, $sort=null, $page=null, $perPage=null)
+    public function listMergeRequests($projectId, $state = null, $orderBy = null, $sort = null, $page = null, $perPage = null)
     {
         return $this->client->listMergeRequests(array_filter([
             'project_id' => $projectId,

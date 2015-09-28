@@ -12,7 +12,7 @@ namespace Gitlab\Client;
 
 class MockGitlabClient implements GitlabClient
 {
-    public function listMergeRequests($projectId, $state=null, $orderBy=null, $sort=null, $sort=null, $perPage=null)
+    public function listMergeRequests($projectId, $state = null, $orderBy = null, $sort = null, $sort = null, $perPage = null)
     {
         return [];
     }

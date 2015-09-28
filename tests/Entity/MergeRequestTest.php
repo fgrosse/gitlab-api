@@ -19,32 +19,32 @@ class MergeRequestTest extends PHPUnit_Framework_TestCase
     public function testFromArray()
     {
         $actual = MergeRequest::fromArray([
-            'id'=> 1,
-            'iid'=> 2,
-            'target_branch'=> 'master',
-            'source_branch'=> 'test1',
-            'project_id'=> 3,
-            'title'=> 'test1',
-            'state'=> 'opened',
-            'upvotes'=> 4,
-            'downvotes'=> 5,
-            'author'=> [
-                'id'=> 1,
-                'username'=> 'admin',
-                'email'=> 'admin@example.com',
-                'name'=> 'Administrator',
-                'state'=> 'active',
-                'created_at'=> '2012-04-29T08=>46=>00Z'
+            'id' => 1,
+            'iid' => 2,
+            'target_branch' => 'master',
+            'source_branch' => 'test1',
+            'project_id' => 3,
+            'title' => 'test1',
+            'state' => 'opened',
+            'upvotes' => 4,
+            'downvotes' => 5,
+            'author' => [
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'admin@example.com',
+                'name' => 'Administrator',
+                'state' => 'active',
+                'created_at' => '2012-04-29T08=>46=>00Z',
             ],
-            'assignee'=> [
-                'id'=> 1,
-                'username'=> 'admin',
-                'email'=> 'admin@example.com',
-                'name'=> 'Administrator',
-                'state'=> 'active',
-                'created_at'=> '2012-04-29T08=>46=>00Z'
+            'assignee' => [
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'admin@example.com',
+                'name' => 'Administrator',
+                'state' => 'active',
+                'created_at' => '2012-04-29T08=>46=>00Z',
             ],
-            'description'=> 'fixed login page css paddings'
+            'description' => 'fixed login page css paddings',
         ]);
 
         $this->assertEquals(1, $actual->id);

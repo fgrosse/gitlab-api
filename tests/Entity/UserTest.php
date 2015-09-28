@@ -10,7 +10,6 @@
 
 namespace Gitlab\Test\Entity;
 
-use Gitlab\Entity\MergeRequest;
 use Gitlab\Entity\User;
 use PHPUnit_Framework_TestCase;
 
@@ -19,11 +18,11 @@ class UserTest extends PHPUnit_Framework_TestCase
     public function testFromArray()
     {
         $actual = User::fromArray([
-            'id'=> 1,
-            'username'=> 'john_smith',
-            'name'=> 'John Smith',
-            'state'=> 'active',
-            'avatar_url'=> 'http=>//localhost=>3000/uploads/user/avatar/1/cd8.jpeg',
+            'id' => 1,
+            'username' => 'john_smith',
+            'name' => 'John Smith',
+            'state' => 'active',
+            'avatar_url' => 'http=>//localhost=>3000/uploads/user/avatar/1/cd8.jpeg',
         ]);
 
         $this->assertEquals(1, $actual->id);

@@ -27,7 +27,7 @@ class ResponseClassProcessor implements SubscriberInterface
 
     public function getEvents()
     {
-        return ['process' => ['onProcess', ]];
+        return ['process' => ['onProcess']];
     }
 
     public function onProcess(ProcessEvent $event)
@@ -56,7 +56,7 @@ class ResponseClassProcessor implements SubscriberInterface
 
         $result = $event->getResult();
         if (is_array($result) && in_array(ArrayParsable::class, class_implements($responseParserClass))) {
-            /** @var ArrayParsable $responseParserClass */
+            /* @var ArrayParsable $responseParserClass */
             return $responseParserClass::fromArray($result);
         }
 

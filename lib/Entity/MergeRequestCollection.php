@@ -48,7 +48,7 @@ class MergeRequestCollection implements ArrayParsable, ArrayAccess, IteratorAggr
     public function offsetSet($offset, $value)
     {
         if ($value instanceof MergeRequest == false) {
-            throw new LogicException('Can not set an instance of ' . get_class($value) . ' in ' . get_class($this) );
+            throw new LogicException('Can not set an instance of '.get_class($value).' in '.get_class($this));
         }
 
         if ($offset === null) {

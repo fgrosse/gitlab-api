@@ -83,11 +83,11 @@ class MergeRequest implements ArrayParsable
 
     public function __toString()
     {
-        return sprintf("Merge request: %s (%s)", $this->title, $this->getCrossProjectReference());
+        return sprintf('Merge request: %s (%s)', $this->title, $this->getCrossProjectReference());
     }
 
     public function getCrossProjectReference()
     {
-        return sprintf("%s!%d", $this->project, $this->id);
+        return sprintf('%s!%d', $this->project, $this->id);
     }
 }

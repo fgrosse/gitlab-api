@@ -48,7 +48,7 @@ class CommentCollection implements ArrayParsable, ArrayAccess, IteratorAggregate
     public function offsetSet($offset, $value)
     {
         if ($value instanceof Comment == false) {
-            throw new LogicException('Can not set an instance of ' . get_class($value) . ' in ' . get_class($this) );
+            throw new LogicException('Can not set an instance of '.get_class($value).' in '.get_class($this));
         }
 
         $this->comments[$offset] = $value;

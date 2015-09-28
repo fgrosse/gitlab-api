@@ -14,7 +14,7 @@ use Gitlab\Client\GitlabClient;
 use Gitlab\Client\MockGitlabClient;
 use PHPUnit_Framework_TestCase;
 
-class GitlabMockClientTest extends PHPUnit_Framework_TestCase
+class MockGitlabClientTest extends PHPUnit_Framework_TestCase
 {
     public function testMockClientIsAGitlabClient()
     {
