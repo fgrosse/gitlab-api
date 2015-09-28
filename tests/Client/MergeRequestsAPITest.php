@@ -179,12 +179,12 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertInstanceOf(Comment::class, $comment);
     }
 
-    public function testListMergeRequestComments()
+    public function testGetMergeRequestComments()
     {
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/list_merge_request_comments.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
-        $comments = $this->client->listMergeRequestComments([
+        $comments = $this->client->getMergeRequestComments([
             'project_id'       => $projectId,
             'merge_request_id' => $mergeRequestId,
             'page'             => 3,

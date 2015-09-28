@@ -207,7 +207,7 @@ operations:
                 type: string
                 location: postField
 
-    listMergeRequestComments:
+    getMergeRequestComments:
         extends: paginatedOperation
         summary: Adds a comment to a merge request.
         responseClass: Gitlab\Entity\CommentCollection
