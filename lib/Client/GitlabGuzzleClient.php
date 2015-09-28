@@ -32,7 +32,7 @@ use GuzzleHttp\Message\ResponseInterface;
  * @see GitlabGuzzleClient::acceptMergeRequest
  * @method array getMergeRequestChanges($parameters)
  * @method MergeRequest createMergeRequestComment($parameters)
- * @method CommentCollection listMergeRequestComments($parameters)
+ * @method CommentCollection getMergeRequestComments($parameters)
  *
  * Commits API
  * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/commits.md

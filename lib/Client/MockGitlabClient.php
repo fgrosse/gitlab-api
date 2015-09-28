@@ -10,6 +10,8 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Entity\Comment;
+use Gitlab\Entity\CommentCollection;
 use Gitlab\Entity\MergeRequest;
 
 class MockGitlabClient implements GitlabClient
@@ -37,6 +39,16 @@ class MockGitlabClient implements GitlabClient
     public function acceptMergeRequest($projectId, $mergeRequestId, $commitMessage = null)
     {
         return $this->createMockMergeRequest($projectId, $mergeRequestId);
+    }
+
+    public function createMergeRequestComment($projectId, $mergeRequestId, $note)
+    {
+        return new Comment($note);
+    }
+
+    public function getMergeRequestComments($projectId, $mergeRequestId)
+    {
+        return new CommentCollection();
     }
 
     private function createMockMergeRequest($projectId, $mergeRequestId)

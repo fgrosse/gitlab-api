@@ -74,4 +74,21 @@ class HttpGitlabClient implements GitlabClient
             'merge_commit_message' => $commitMessage,
         ]));
     }
+
+    public function createMergeRequestComment($projectId, $mergeRequestId, $note)
+    {
+        return $this->client->createMergeRequestComment(array_filter([
+            'project_id'       => $projectId,
+            'merge_request_id' => $mergeRequestId,
+            'note'             => $note,
+        ]));
+    }
+
+    public function getMergeRequestComments($projectId, $mergeRequestId)
+    {
+        return $this->client->getMergeRequestComments(array_filter([
+            'project_id'       => $projectId,
+            'merge_request_id' => $mergeRequestId,
+        ]));
+    }
 }

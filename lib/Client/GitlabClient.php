@@ -10,6 +10,8 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Entity\Comment;
+use Gitlab\Entity\CommentCollection;
 use Gitlab\Entity\MergeRequest;
 
 interface GitlabClient
@@ -54,8 +56,25 @@ interface GitlabClient
      * Merge changes submitted with MR using this API.
      * @param string $projectId
      * @param int $mergeRequestId
-     * @param string|null $commitMessage  Custom merge commit message
+     * @param string|null $commitMessage Custom merge commit message
      * @return MergeRequest
      */
     public function acceptMergeRequest($projectId, $mergeRequestId, $commitMessage = null);
+
+    /**
+     * Adds a comment to a merge request.
+     * @param string $projectId
+     * @param int $mergeRequestId
+     * @param string $note Text of the comment
+     * @return Comment
+     */
+    public function createMergeRequestComment($projectId, $mergeRequestId, $note);
+
+    /**
+     * Gets all the comments associated with a merge request.
+     * @param string $projectId
+     * @param int $mergeRequestId
+     * @return CommentCollection
+     */
+    public function getMergeRequestComments($projectId, $mergeRequestId);
 }
