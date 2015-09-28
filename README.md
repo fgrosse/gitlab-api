@@ -7,7 +7,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/fgrosse/gitlab-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/fgrosse/gitlab-api/?branch=master)
 
 [![Latest Stable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/stable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
-[![Total Downloads](https://poser.pugx.org/fgrosse/gitlab-api/downloads.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 [![Latest Unstable Version](https://poser.pugx.org/fgrosse/gitlab-api/v/unstable.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 [![License](https://poser.pugx.org/fgrosse/gitlab-api/license.png)](https://packagist.org/packages/fgrosse/gitlab-api)
 
