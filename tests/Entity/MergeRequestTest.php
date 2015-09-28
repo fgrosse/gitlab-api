@@ -60,4 +60,12 @@ class MergeRequestTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(User::class, $actual->author);
         $this->assertInstanceOf(User::class, $actual->assignee);
     }
+
+    public function testGetCrossProjectReference()
+    {
+        $mergeRequest = new MergeRequest();
+        $mergeRequest->project = 'fgrosse/example';
+        $mergeRequest->id = 42;
+        $this->assertEquals('fgrosse/example!42', $mergeRequest->getCrossProjectReference());
+    }
 }

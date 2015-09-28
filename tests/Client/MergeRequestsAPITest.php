@@ -39,6 +39,10 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
 
         $this->assertContainsOnlyInstancesOf(MergeRequest::class, $mergeRequests);
+        /** @var MergeRequest $mergeRequest */
+        foreach ($mergeRequests as $mergeRequest) {
+            $this->assertEquals($projectId, $mergeRequest->project);
+        }
     }
 
     public function testGetMergeRequest()
@@ -56,6 +60,7 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertEquals('application/json', $request->getHeader('Accept'));
 
         $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testGetMergeRequestsChanges()
@@ -99,6 +104,7 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertRequestHasPostParameter('target_project_id', 123, $request);
 
         $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testUpdateMergeRequest()
@@ -129,6 +135,7 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertRequestHasPostParameter('state_event', 'reopen', $request);
 
         $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testAcceptMergeRequest()
@@ -149,6 +156,7 @@ class MergeRequestsAPITest extends GitlabGuzzleClientTest
         $this->assertRequestHasPostParameter('merge_commit_message', 'Merging foo into bar', $request);
 
         $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testCreateMergeRequestComment()

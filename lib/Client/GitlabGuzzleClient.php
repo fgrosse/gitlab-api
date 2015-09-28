@@ -10,8 +10,9 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Entity\CommentCollection;
+use Gitlab\Entity\MergeRequest;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Command\Command;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Message\ResponseInterface;
@@ -24,14 +25,14 @@ use GuzzleHttp\Message\ResponseInterface;
  *
  * Merge Requests API:
  * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/merge_requests.md
- * @method array listMergeRequests($parameters)
- * @method array getMergeRequest($parameters)
+ * @see GitlabGuzzleClient::listMergeRequests
+ * @see GitlabGuzzleClient::createMergeRequest
+ * @see GitlabGuzzleClient::getMergeRequest
+ * @see GitlabGuzzleClient::updateMergeRequest
+ * @see GitlabGuzzleClient::acceptMergeRequest
  * @method array getMergeRequestChanges($parameters)
- * @method array createMergeRequest($parameters)
- * @method array updateMergeRequest($parameters)
- * @method array createMergeRequestComment($parameters)
- * @method array listMergeRequestComments($parameters)
- * @method array acceptMergeRequest($parameters)
+ * @method MergeRequest createMergeRequestComment($parameters)
+ * @method CommentCollection listMergeRequestComments($parameters)
  *
  * Commits API
  * @see https://github.com/gitlabhq/gitlabhq/blob/v7.7.0/doc/api/commits.md
@@ -90,8 +91,6 @@ class GitlabGuzzleClient extends GuzzleClient
      * @var string[]
      */
     private $executeWithBody = [
-        'updateMergeRequest',
-        'acceptMergeRequest',
         'updateIssue',
         'updateLabel',
         'deleteLabel',
@@ -130,8 +129,80 @@ class GitlabGuzzleClient extends GuzzleClient
             'body' => [],
         ];
 
-        /** @var Command $command */
         $command = $this->getCommand($commandName, $parameters);
         return $this->execute($command);
+    }
+
+    /**
+     * @param array $parameters
+     * @return MergeRequest[]
+     */
+    public function listMergeRequests(array $parameters)
+    {
+        $command = $this->getCommand('listMergeRequests', $parameters);
+
+        /** @var MergeRequest[] $mergeRequests */
+        $mergeRequests = $this->execute($command);
+        foreach ($mergeRequests as $mergeRequest) {
+            $mergeRequest->project = $parameters['project_id'];
+        }
+
+        return $mergeRequests;
+    }
+
+    /**
+     * @param array $parameters
+     * @return MergeRequest
+     */
+    public function createMergeRequest(array $parameters)
+    {
+        $command = $this->getCommand('createMergeRequest', $parameters);
+
+        /** @var MergeRequest $mergeRequest */
+        $mergeRequest = $this->execute($command);
+        $mergeRequest->project = $parameters['project_id'];
+
+        return $mergeRequest;
+    }
+
+    /**
+     * @param array $parameters
+     * @return MergeRequest
+     */
+    public function getMergeRequest(array $parameters)
+    {
+        $command = $this->getCommand('getMergeRequest', $parameters);
+
+        /** @var MergeRequest $mergeRequest */
+        $mergeRequest = $this->execute($command);
+        $mergeRequest->project = $parameters['project_id'];
+
+        return $mergeRequest;
+    }
+
+    /**
+     * @param array $parameters
+     * @return MergeRequest
+     */
+    public function updateMergeRequest(array $parameters)
+    {
+        /** @var MergeRequest $mergeRequest */
+        $mergeRequest = $this->executeRequestWithBody('updateMergeRequest', $parameters);
+        $mergeRequest->project = $parameters['project_id'];
+
+        return $mergeRequest;
+    }
+
+    /**
+     * @param array $parameters
+     * @return MergeRequest
+     */
+    public function acceptMergeRequest(array $parameters)
+    {
+        /** @var MergeRequest $mergeRequest */
+        $mergeRequest = $this->executeRequestWithBody('acceptMergeRequest', $parameters);
+        $mergeRequest->project = $parameters['project_id'];
+
+        return $mergeRequest;
     }
 }
