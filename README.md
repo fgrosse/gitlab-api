@@ -35,8 +35,27 @@ $ composer require fgrosse/gitlab-api
 
 ## Usage
 
-The API is still work in progress and the actual usage might change in the future. For now you can use the `GitlabClient`
-directly like this:
+The API is still work in progress and the actual usage might change in the future.
+
+The stable part of this API is available through the [GitlabClient interface](lib/Client/GitlabClient.php):
+
+```php
+$guzzleClient = GitlabGuzzleClient::factory([
+    'base_url'  => $baseUrl,
+    'api_token' => $token,
+]);
+
+$client = new HttpGitlabClient($guzzleClient);
+
+$mergeRequests = $client->listMergeRequests($project,
+    $state='closed',
+    $order='updated_at',
+    $sort='asc',
+    $page=1, $perPage=5
+);
+```
+
+If you want to access more functionality consider using the `GitlabClient` directly:
 
 ```php
 $client = GitlabClient::factory([
@@ -54,9 +73,8 @@ $mergeRequests = $client->listMergeRequests([
 ]);
 ```
 
-In the future I will probably create a facade around the client which follows a well defined interface.
-Until then you need to checkout the [lib/Client/ServiceDescription][6] to see the available
-parameters for each API call.
+Checkout the [lib/Client/ServiceDescription][6] to see the available parameters for each API call.
+An executable example can be found in [examples/merge_requests/api.php](examples/merge_requests_api.php). 
 
 ### Not implemented APIs (yet)
  * deploy_key_multiple_projects API
