@@ -26,7 +26,7 @@ class GuzzleClientFactory
     /**
      * Create a new instance of GitlabClient.
      * @param array $config
-     * @return GitlabClient
+     * @return GitlabGuzzleClient
      */
     public static function createClient($config = [])
     {
@@ -48,8 +48,8 @@ class GuzzleClientFactory
         $privateTokenPlugin = new PrivateTokenPlugin($config['api_token']);
         $client->getEmitter()->attach($privateTokenPlugin);
 
-        $gitlabClient = new GitlabClient($client, $description);
-        $gitlabClient->getEmitter()->attach(new ResponseModelProcessor($description));
+        $gitlabClient = new GitlabGuzzleClient($client, $description);
+        $gitlabClient->getEmitter()->attach(new ResponseClassProcessor($description));
         return $gitlabClient;
     }
 

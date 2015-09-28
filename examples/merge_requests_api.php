@@ -9,7 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Gitlab\Client\GitlabClient;
+use Gitlab\Client\GitlabGuzzleClient;
+use Gitlab\Client\HttpGitlabClient;
 
 include __DIR__.'/../vendor/autoload.php';
 include __DIR__.'/cli_helper.php';
@@ -19,21 +20,23 @@ $token   = getParameter('token', $argv);
 $project = getParameter('project', $argv);
 
 try {
-    $client = GitlabClient::factory([
+    $guzzleClient = GitlabGuzzleClient::factory([
         'base_url'  => $baseUrl,
         'api_token' => $token,
     ]);
 
-    $mergeRequests = $client->listMergeRequests([
-        'project_id' => $project,
-        'state'      => 'closed',
-        'order_by'   => 'updated_at',
-        'sort'       => 'asc',
-        'page'       => 0,
-        'per_page'   => 5,
-    ]);
+    $client = new HttpGitlabClient($guzzleClient);
 
-    var_dump($mergeRequests);
+    $mergeRequests = $client->listMergeRequests($project,
+        $state = 'closed',
+        $order = 'updated_at',
+        $sort = 'asc',
+        $page = 1, $perPage = 5
+    );
+
+    foreach ($mergeRequests as $mergeRequest) {
+        echo $mergeRequest.PHP_EOL;
+    }
 } catch (Exception $exception) {
     printError('An Exception of type '.get_class($exception).' occurred:');
     printError($exception->getMessage());

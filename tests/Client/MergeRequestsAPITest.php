@@ -10,13 +10,16 @@
 
 namespace Gitlab\Test\Client;
 
-class MergeRequestsAPITest extends GitlabClientTest
+use Gitlab\Entity\Comment;
+use Gitlab\Entity\MergeRequest;
+
+class MergeRequestsAPITest extends GitlabGuzzleClientTest
 {
     public function testListMergeRequests()
     {
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/list_merge_requests.http');
         $projectId = 'fgrosse/example-project';
-        $this->client->listMergeRequests([
+        $mergeRequests = $this->client->listMergeRequests([
             'project_id' => $projectId,
             'state'      => 'closed',
             'order_by'   => 'updated_at',
@@ -34,13 +37,19 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertRequestHasQueryParameter('sort', 'asc', $request);
         $this->assertRequestHasQueryParameter('page', 3, $request);
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
+
+        $this->assertContainsOnlyInstancesOf(MergeRequest::class, $mergeRequests);
+        /** @var MergeRequest $mergeRequest */
+        foreach ($mergeRequests as $mergeRequest) {
+            $this->assertEquals($projectId, $mergeRequest->project);
+        }
     }
 
     public function testGetMergeRequest()
     {
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/single_merge_request.http');
         $projectId = 'fgrosse/example-project';
-        $this->client->getMergeRequest([
+        $mergeRequest = $this->client->getMergeRequest([
             'project_id' => $projectId,
             'merge_request_id' => 42,
         ]);
@@ -49,6 +58,9 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('GET', $request->getMethod());
         $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId).'/merge_requests/42', $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
+
+        $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testGetMergeRequestsChanges()
@@ -70,7 +82,7 @@ class MergeRequestsAPITest extends GitlabClientTest
     {
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/create_merge_request.http');
         $projectId = 'fgrosse/example-project';
-        $this->client->createMergeRequest([
+        $mergeRequest = $this->client->createMergeRequest([
             'project_id'    => $projectId,
             'source_branch' => 'feature/test',
             'target_branch' => 'develop',
@@ -90,6 +102,9 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertRequestHasPostParameter('title', 'Test MR', $request);
         $this->assertRequestHasPostParameter('description', 'This is a description', $request);
         $this->assertRequestHasPostParameter('target_project_id', 123, $request);
+
+        $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testUpdateMergeRequest()
@@ -97,7 +112,7 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/update_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
-        $this->client->updateMergeRequest([
+        $mergeRequest = $this->client->updateMergeRequest([
             'project_id'    => $projectId,
             'merge_request_id' => $mergeRequestId,
             'source_branch' => 'feature/test',
@@ -118,6 +133,9 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertRequestHasPostParameter('title', 'Test MR', $request);
         $this->assertRequestHasPostParameter('description', 'This is a description', $request);
         $this->assertRequestHasPostParameter('state_event', 'reopen', $request);
+
+        $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testAcceptMergeRequest()
@@ -125,7 +143,7 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/accept_merge_request.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
-        $this->client->acceptMergeRequest([
+        $mergeRequest = $this->client->acceptMergeRequest([
             'project_id'    => $projectId,
             'merge_request_id' => $mergeRequestId,
             'merge_commit_message' => 'Merging foo into bar',
@@ -136,6 +154,9 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/merge", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('merge_commit_message', 'Merging foo into bar', $request);
+
+        $this->assertInstanceOf(MergeRequest::class, $mergeRequest);
+        $this->assertEquals($projectId, $mergeRequest->project);
     }
 
     public function testCreateMergeRequestComment()
@@ -143,7 +164,7 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/create_merge_request_comment.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
-        $this->client->createMergeRequestComment([
+        $comment = $this->client->createMergeRequestComment([
             'project_id'       => $projectId,
             'merge_request_id' => $mergeRequestId,
             'note'             => 'This is a comment',
@@ -154,6 +175,8 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
         $this->assertEquals('application/json', $request->getHeader('Accept'));
         $this->assertRequestHasPostParameter('note', 'This is a comment', $request);
+
+        $this->assertInstanceOf(Comment::class, $comment);
     }
 
     public function testListMergeRequestComments()
@@ -161,7 +184,7 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->setMockResponse(__DIR__.'/fixtures/merge_requests/list_merge_request_comments.http');
         $projectId = 'fgrosse/example-project';
         $mergeRequestId = 42;
-        $this->client->listMergeRequestComments([
+        $comments = $this->client->listMergeRequestComments([
             'project_id'       => $projectId,
             'merge_request_id' => $mergeRequestId,
             'page'             => 3,
@@ -173,5 +196,7 @@ class MergeRequestsAPITest extends GitlabClientTest
         $this->assertEquals('/gitlab/api/v3/projects/'.urlencode($projectId)."/merge_requests/$mergeRequestId/comments", $request->getPath());
         $this->assertRequestHasQueryParameter('page', 3, $request);
         $this->assertRequestHasQueryParameter('per_page', 15, $request);
+
+        $this->assertContainsOnlyInstancesOf(Comment::class, $comments);
     }
 }

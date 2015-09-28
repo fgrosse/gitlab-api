@@ -10,7 +10,7 @@
 
 namespace Gitlab\Test\Client;
 
-class LabelsAPITest extends GitlabClientTest
+class LabelsAPITest extends GitlabGuzzleClientTest
 {
     public function testListLabels()
     {

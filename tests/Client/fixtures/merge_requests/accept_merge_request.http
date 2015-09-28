@@ -3,10 +3,12 @@ Content-Type: application/json
 
 {
   "id": 1,
+  "iid": 42,
   "target_branch": "master",
   "source_branch": "test1",
   "project_id": 3,
   "title": "test1",
+  "description": "Hello World",
   "state": "merged",
   "upvotes": 0,
   "downvotes": 0,
