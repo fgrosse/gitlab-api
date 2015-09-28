@@ -81,6 +81,19 @@ class MergeRequest implements ArrayParsable
         return $mergeRequest;
     }
 
+    /**
+     * MergeRequest constructor.
+     * @param string $project
+     * @param string $title
+     * @param int|null $id
+     */
+    public function __construct($project = '', $title = '', $id = null)
+    {
+        $this->project = $project;
+        $this->title = $title;
+        $this->id = $id;
+    }
+
     public function __toString()
     {
         return sprintf('Merge request: %s (%s)', $this->title, $this->getCrossProjectReference());

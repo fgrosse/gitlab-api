@@ -154,9 +154,9 @@ class GitlabGuzzleClient extends GuzzleClient
      * @param array $parameters
      * @return MergeRequest
      */
-    public function createMergeRequest(array $parameters)
+    public function getMergeRequest(array $parameters)
     {
-        $command = $this->getCommand('createMergeRequest', $parameters);
+        $command = $this->getCommand('getMergeRequest', $parameters);
 
         /** @var MergeRequest $mergeRequest */
         $mergeRequest = $this->execute($command);
@@ -169,9 +169,9 @@ class GitlabGuzzleClient extends GuzzleClient
      * @param array $parameters
      * @return MergeRequest
      */
-    public function getMergeRequest(array $parameters)
+    public function createMergeRequest(array $parameters)
     {
-        $command = $this->getCommand('getMergeRequest', $parameters);
+        $command = $this->getCommand('createMergeRequest', $parameters);
 
         /** @var MergeRequest $mergeRequest */
         $mergeRequest = $this->execute($command);

@@ -10,6 +10,8 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Entity\MergeRequest;
+
 interface GitlabClient
 {
     /**
@@ -25,4 +27,26 @@ interface GitlabClient
      * @return \Gitlab\Entity\MergeRequest[]
      */
     public function listMergeRequests($projectId, $state = null, $orderBy = null, $sort = null, $page = null, $perPage = null);
+
+    /**
+     * Shows information about the merge request including its files and changes.
+     * @param string $projectId
+     * @param string $mergeRequestId
+     * @return MergeRequest
+     */
+    public function getMergeRequest($projectId, $mergeRequestId);
+
+    /**
+     * Creates a new merge request.
+     * @param MergeRequest $mergeRequest
+     * @return MergeRequest
+     */
+    public function createMergeRequest(MergeRequest $mergeRequest);
+
+    /**
+     * Updates an existing merge request. You can change branches, title, or even close the MR.
+     * @param MergeRequest $mergeRequest
+     * @return MergeRequest
+     */
+    public function updateMergeRequest(MergeRequest $mergeRequest);
 }

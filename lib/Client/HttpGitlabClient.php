@@ -10,6 +10,8 @@
 
 namespace Gitlab\Client;
 
+use Gitlab\Entity\MergeRequest;
+
 class HttpGitlabClient implements GitlabClient
 {
     private $client;
@@ -28,6 +30,39 @@ class HttpGitlabClient implements GitlabClient
             'sort'       => $sort,
             'page'       => $page,
             'per_page'   => $perPage,
+        ]));
+    }
+
+    public function getMergeRequest($projectId, $mergeRequestId)
+    {
+        return $this->client->getMergeRequest(array_filter([
+            'project_id' => $projectId,
+            'merge_request_id' => $mergeRequestId,
+        ]));
+    }
+
+    public function createMergeRequest(MergeRequest $mergeRequest)
+    {
+        return $this->client->createMergeRequest(array_filter([
+            'project_id'    => $mergeRequest->project,
+            'source_branch' => $mergeRequest->sourceBranch,
+            'target_branch' => $mergeRequest->targetBranch,
+            'title'         => $mergeRequest->title,
+            'description'   => $mergeRequest->description,
+            'assignee_id'   => isset($mergeRequest->assignee) ? $mergeRequest->assignee->id : null,
+        ]));
+    }
+
+    public function updateMergeRequest(MergeRequest $mergeRequest)
+    {
+        return $this->client->updateMergeRequest(array_filter([
+            'project_id'       => $mergeRequest->project,
+            'merge_request_id' => $mergeRequest->id,
+            'source_branch'    => $mergeRequest->sourceBranch,
+            'target_branch'    => $mergeRequest->targetBranch,
+            'title'            => $mergeRequest->title,
+            'description'      => $mergeRequest->description,
+            'assignee_id'      => isset($mergeRequest->assignee) ? $mergeRequest->assignee->id : null,
         ]));
     }
 }
