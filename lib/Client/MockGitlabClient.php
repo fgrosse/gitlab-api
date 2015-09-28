@@ -10,12 +10,10 @@
 
 namespace Gitlab\Client;
 
-interface ResponseParser
+class MockGitlabClient implements GitlabClient
 {
-    /**
-     * Unmarshal a response object from an array.
-     * @param array $data
-     * @return mixed
-     */
-    public static function fromArray(array $data);
+    public function listMergeRequests($projectId, $state=null, $orderBy=null, $sort=null, $sort=null, $perPage=null)
+    {
+        return [];
+    }
 }

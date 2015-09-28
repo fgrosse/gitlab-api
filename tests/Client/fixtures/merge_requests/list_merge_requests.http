@@ -9,6 +9,7 @@ Content-Type: application/json
     "source_branch": "test1",
     "project_id": 3,
     "title": "test1",
+    "description": "Hello World",
     "state": "opened",
     "upvotes": 0,
     "downvotes": 0,

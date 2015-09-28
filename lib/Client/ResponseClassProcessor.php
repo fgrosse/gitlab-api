@@ -15,7 +15,7 @@ use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
 use RuntimeException;
 
-class ResponseModelProcessor implements SubscriberInterface
+class ResponseClassProcessor implements SubscriberInterface
 {
     /** @var DescriptionInterface */
     private $description;
@@ -27,18 +27,13 @@ class ResponseModelProcessor implements SubscriberInterface
 
     public function getEvents()
     {
-        return ['process' => ['onProcess']];
+        return ['process' => ['onProcess', ]];
     }
 
     public function onProcess(ProcessEvent $event)
     {
         // Only add a result object if no exception was encountered.
         if ($event->getException()) {
-            return;
-        }
-
-        $result = $event->getResult();
-        if (is_array($result) == false) {
             return;
         }
 
@@ -49,17 +44,22 @@ class ResponseModelProcessor implements SubscriberInterface
             return;
         }
 
-        $responseParser = $rawConfig['responseParser'];
-        if (class_exists($responseParser) == false) {
-            throw new RuntimeException("Unknown response parser: {$responseParser}");
-        }
-
-        if (in_array(ResponseParser::class, class_implements($responseParser)) == false) {
-            throw new RuntimeException("Response parser {$responseParser} does not implement ".ResponseParser::class);
-        }
-
-        /* @var ResponseParser $responseParser */
-        $parsedResponse = $responseParser::fromArray($result);
+        $parsedResponse = $this->parseResponse($event, $rawConfig['responseParser']);
         $event->setResult($parsedResponse);
+    }
+
+    private function parseResponse(ProcessEvent $event, $responseParserClass)
+    {
+        if (class_exists($responseParserClass) == false) {
+            throw new RuntimeException("Unknown response parser: {$responseParserClass}");
+        }
+
+        $result = $event->getResult();
+        if (is_array($result) && in_array(ArrayParsable::class, class_implements($responseParserClass))) {
+            /** @var ArrayParsable $responseParserClass */
+            return $responseParserClass::fromArray($result);
+        }
+
+        throw new RuntimeException("Response parser {$responseParserClass} does not implement ".ArrayParsable::class);
     }
 }

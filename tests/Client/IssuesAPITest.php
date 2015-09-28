@@ -10,7 +10,7 @@
 
 namespace Gitlab\Test\Client;
 
-class IssuesAPITest extends GitlabClientTest
+class IssuesAPITest extends GitlabGuzzleClientTest
 {
     public function testListIssues()
     {

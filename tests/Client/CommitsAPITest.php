@@ -10,7 +10,7 @@
 
 namespace Gitlab\Test\Client;
 
-class CommitsAPITest extends GitlabClientTest
+class CommitsAPITest extends GitlabGuzzleClientTest
 {
     public function testListCommits()
     {

@@ -10,7 +10,7 @@
 
 namespace Client;
 
-use Gitlab\Client\GitlabClient;
+use Gitlab\Client\GitlabGuzzleClient;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit_Framework_TestCase;
 
@@ -18,7 +18,7 @@ class GuzzleMockingTest extends PHPUnit_Framework_TestCase
 {
     public function testGuzzleServicesIssue70()
     {
-        $client = GitlabClient::factory([
+        $client = GitlabGuzzleClient::factory([
             'base_url' => 'https://example.com/gitlab/api/v3',
             'api_token' => 'QVy1PB7sTxfy4pqfZM1U',
         ]);
