@@ -21,10 +21,7 @@ class MockGitlabClient implements GitlabClient
 
     public function getMergeRequest($projectId, $mergeRequestId)
     {
-        $mergeRequest = new MergeRequest($projectId, "Mock merge request #$mergeRequestId");
-        $mergeRequest->id = $mergeRequestId;
-
-        return $mergeRequest;
+        return $this->createMockMergeRequest($projectId, $mergeRequestId);
     }
 
     public function createMergeRequest(MergeRequest $mergeRequest)
@@ -34,6 +31,19 @@ class MockGitlabClient implements GitlabClient
 
     public function updateMergeRequest(MergeRequest $mergeRequest)
     {
+        return $mergeRequest;
+    }
+
+    public function acceptMergeRequest($projectId, $mergeRequestId, $commitMessage = null)
+    {
+        return $this->createMockMergeRequest($projectId, $mergeRequestId);
+    }
+
+    private function createMockMergeRequest($projectId, $mergeRequestId)
+    {
+        $mergeRequest = new MergeRequest($projectId, "Mock merge request #$mergeRequestId");
+        $mergeRequest->id = $mergeRequestId;
+
         return $mergeRequest;
     }
 }

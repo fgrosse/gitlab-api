@@ -49,4 +49,13 @@ interface GitlabClient
      * @return MergeRequest
      */
     public function updateMergeRequest(MergeRequest $mergeRequest);
+
+    /**
+     * Merge changes submitted with MR using this API.
+     * @param string $projectId
+     * @param int $mergeRequestId
+     * @param string|null $commitMessage  Custom merge commit message
+     * @return MergeRequest
+     */
+    public function acceptMergeRequest($projectId, $mergeRequestId, $commitMessage = null);
 }

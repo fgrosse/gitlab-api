@@ -65,4 +65,13 @@ class HttpGitlabClient implements GitlabClient
             'assignee_id'      => isset($mergeRequest->assignee) ? $mergeRequest->assignee->id : null,
         ]));
     }
+
+    public function acceptMergeRequest($projectId, $mergeRequestId, $commitMessage = null)
+    {
+        return $this->client->acceptMergeRequest(array_filter([
+            'project_id'           => $projectId,
+            'merge_request_id'     => $mergeRequestId,
+            'merge_commit_message' => $commitMessage,
+        ]));
+    }
 }
